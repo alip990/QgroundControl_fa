@@ -178,7 +178,7 @@ Rectangle {
 
         QGCCheckBox {
             anchors.right:  parent.right
-            text:           qsTr("Altitudes relative to launch")
+            text:           qsTr("نسبت به نقطه شروع")
             checked:        missionItem.altitudesAreRelative
             visible:        QGroundControl.corePlugin.options.showMissionAbsoluteAltitude || !missionItem.altitudesAreRelative
             onClicked:      missionItem.altitudesAreRelative = checked
@@ -188,7 +188,7 @@ Rectangle {
             id:             cameraSection
             anchors.left:   parent.left
             anchors.right:  parent.right
-            text:           qsTr("Camera")
+            text:           qsTr("دوربین")
             visible:        _showCameraSection
         }
 

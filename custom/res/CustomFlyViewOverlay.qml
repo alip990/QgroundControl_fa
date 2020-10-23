@@ -25,7 +25,7 @@ Item {
     property var totalToolInsets:   _totalToolInsets    // The insets updated for the custom overlay additions
     property var mapControl
 
-    readonly property string noGPS:         qsTr("NO GPS")
+    readonly property string noGPS:         qsTr("gps بدون")
     readonly property real   indicatorValueWidth:   ScreenTools.defaultFontPixelWidth * 7
 
     property var    _activeVehicle:         QGroundControl.multiVehicleManager.activeVehicle
@@ -62,47 +62,7 @@ Item {
 
     //-------------------------------------------------------------------------
     //-- Heading Indicator
-    Rectangle {
-        id:                         compassBar
-        height:                     ScreenTools.defaultFontPixelHeight * 1.5
-        width:                      ScreenTools.defaultFontPixelWidth  * 50
-        color:                      "#DEDEDE"
-        radius:                     2
-        clip:                       true
-        anchors.top:                headingIndicator.bottom
-        anchors.topMargin:          -headingIndicator.height / 2
-        anchors.horizontalCenter:   parent.horizontalCenter
-        Repeater {
-            model: 720
-            QGCLabel {
-                function _normalize(degrees) {
-                    var a = degrees % 360
-                    if (a < 0) a += 360
-                    return a
-                }
-                property int _startAngle: modelData + 180 + _heading
-                property int _angle: _normalize(_startAngle)
-                anchors.verticalCenter: parent.verticalCenter
-                x:              visible ? ((modelData * (compassBar.width / 360)) - (width * 0.5)) : 0
-                visible:        _angle % 45 == 0
-                color:          "#75505565"
-                font.pointSize: ScreenTools.smallFontPointSize
-                text: {
-                    switch(_angle) {
-                    case 0:     return "N"
-                    case 45:    return "NE"
-                    case 90:    return "E"
-                    case 135:   return "SE"
-                    case 180:   return "S"
-                    case 225:   return "SW"
-                    case 270:   return "W"
-                    case 315:   return "NW"
-                    }
-                    return ""
-                }
-            }
-        }
-    }
+
     Rectangle {
         id:                         headingIndicator
         height:                     ScreenTools.defaultFontPixelHeight

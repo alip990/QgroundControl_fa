@@ -38,8 +38,8 @@ Rectangle {
     property bool   _simpleMissionStart:            QGroundControl.corePlugin.options.showSimpleMissionStart
     property bool   _showFlightSpeed:               !_controllerVehicle.vtol && !_simpleMissionStart && !_controllerVehicle.apmFirmware
 
-    readonly property string _firmwareLabel:    qsTr("Firmware")
-    readonly property string _vehicleLabel:     qsTr("Vehicle")
+    readonly property string _firmwareLabel:    qsTr("نرم افزار پرنده")
+    readonly property string _vehicleLabel:     qsTr("پرنده")
     readonly property real  _margin:            ScreenTools.defaultFontPixelWidth / 2
 
     QGCPalette { id: qgcPal }
@@ -54,7 +54,7 @@ Rectangle {
         spacing:            _margin
 
         QGCLabel {
-            text:           qsTr("All Altitudes")
+            text:           qsTr("مبدا ارتفاع")
             font.pointSize: ScreenTools.smallFontPointSize
         }
         QGCComboBox {
@@ -104,13 +104,14 @@ Rectangle {
             font.pointSize:         ScreenTools.smallFontPointSize
             text:                   switch(_missionController.globalAltitudeMode) {
                                     case QGroundControl.AltitudeModeAboveTerrain:
-                                        qsTr("Specified altitudes are distance above terrain. Actual altitudes sent to vehicle are calculated from terrain data and sent in AMSL")
+                                        qsTr("ارتفاع مشخص شده فاصله از سطح زمین است . ارتفاع واقعی ارسال شده برحسب ژئودتیک محاسبه میشوند. ")
                                         break
                                     case QGroundControl.AltitudeModeTerrainFrame:
-                                        qsTr("Specified altitudes are distance above terrain. The actual altitude flown is controlled by the vehicle either from terrain height maps being sent to vehicle or a distance sensor.")
+                                        qsTr("ارتفاع واقعی پرواز شده توسط وسیله نقلیه یا از طریق نقشه های ارتفاع زمینی که به وسیله نقلیه ارسال می شود یا حسگر فاصله کنترل می شود.
+")
                                         break
                                     case QGroundControl.AltitudeModeNone:
-                                        qsTr("The altitude mode can differ for each individual item.")
+                                        qsTr("حالت ارتفاع می تواند برای هر مورد متفاوت باشد.")
                                         break
                                     default:
                                         ""
@@ -120,7 +121,7 @@ Rectangle {
         }
 
         QGCLabel {
-            text:           qsTr("Initial Waypoint Alt")
+            text:           qsTr("ارتفاع پیش فرض")
             font.pointSize: ScreenTools.smallFontPointSize
         }
         AltitudeFactTextField {
@@ -137,7 +138,7 @@ Rectangle {
 
             QGCCheckBox {
                 id:         flightSpeedCheckBox
-                text:       qsTr("Flight speed")
+                text:       qsTr("سرعت پرواز")
                 visible:    _showFlightSpeed
                 checked:    missionItem.speedSection.specifyFlightSpeed
                 onClicked:   missionItem.speedSection.specifyFlightSpeed = checked
@@ -164,130 +165,131 @@ Rectangle {
             QGCLabel {
                 anchors.left:           parent.left
                 anchors.right:          parent.right
-                text:                   qsTr("Above camera commands will take affect immediately upon mission start.")
+                text:                   qsTr("دستورات بالا برای دوربین بلافاصله با شروع ماموریت تأثیرگذار هستند
+.")
                 wrapMode:               Text.WordWrap
                 horizontalAlignment:    Text.AlignHCenter
                 font.pointSize:         ScreenTools.smallFontPointSize
                 visible:                _showCameraSection && cameraSection.checked
             }
 
-            SectionHeader {
-                id:             vehicleInfoSectionHeader
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-                text:           qsTr("Vehicle Info")
-                visible:        !_waypointsOnlyMode
-                checked:        false
-            }
+//            SectionHeader {
+//                id:             vehicleInfoSectionHeader
+//                anchors.left:   parent.left
+//                anchors.right:  parent.right
+//                text:           qsTr("اطلاعات پرنده")
+//                visible:        !_waypointsOnlyMode
+//                checked:        false
+//            }
 
-            GridLayout {
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-                columnSpacing:  ScreenTools.defaultFontPixelWidth
-                rowSpacing:     columnSpacing
-                columns:        2
-                visible:        vehicleInfoSectionHeader.visible && vehicleInfoSectionHeader.checked
+//            GridLayout {
+//                anchors.left:   parent.left
+//                anchors.right:  parent.right
+//                columnSpacing:  ScreenTools.defaultFontPixelWidth
+//                rowSpacing:     columnSpacing
+//                columns:        2
+//                visible:        vehicleInfoSectionHeader.visible && vehicleInfoSectionHeader.checked
 
-                QGCLabel {
-                    text:               _firmwareLabel
-                    Layout.fillWidth:   true
-                    visible:            _multipleFirmware
-                }
-                FactComboBox {
-                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingFirmwareClass
-                    indexModel:             false
-                    Layout.preferredWidth:  _fieldWidth
-                    visible:                _multipleFirmware && _noMissionItemsAdded
-                }
-                QGCLabel {
-                    text:       _controllerVehicle.firmwareTypeString
-                    visible:    _multipleFirmware && !_noMissionItemsAdded
-                }
+//                QGCLabel {
+//                    text:               _firmwareLabel
+//                    Layout.fillWidth:   true
+//                    visible:            _multipleFirmware
+//                }
+//                FactComboBox {
+//                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingFirmwareClass
+//                    indexModel:             false
+//                    Layout.preferredWidth:  _fieldWidth
+//                    visible:                _multipleFirmware && _noMissionItemsAdded
+//                }
+//                QGCLabel {
+//                    text:       _controllerVehicle.firmwareTypeString
+//                    visible:    _multipleFirmware && !_noMissionItemsAdded
+//                }
 
-                QGCLabel {
-                    text:               _vehicleLabel
-                    Layout.fillWidth:   true
-                    visible:            _multipleVehicleTypes
-                }
-                FactComboBox {
-                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingVehicleClass
-                    indexModel:             false
-                    Layout.preferredWidth:  _fieldWidth
-                    visible:                _multipleVehicleTypes && _noMissionItemsAdded
-                }
-                QGCLabel {
-                    text:       _controllerVehicle.vehicleTypeString
-                    visible:    _multipleVehicleTypes && !_noMissionItemsAdded
-                }
+//                QGCLabel {
+//                    text:               _vehicleLabel
+//                    Layout.fillWidth:   true
+//                    visible:            _multipleVehicleTypes
+//                }
+//                FactComboBox {
+//                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingVehicleClass
+//                    indexModel:             false
+//                    Layout.preferredWidth:  _fieldWidth
+//                    visible:                _multipleVehicleTypes && _noMissionItemsAdded
+//                }
+//                QGCLabel {
+//                    text:       _controllerVehicle.vehicleTypeString
+//                    visible:    _multipleVehicleTypes && !_noMissionItemsAdded
+//                }
 
-                QGCLabel {
-                    text:               qsTr("Cruise speed")
-                    visible:            _showCruiseSpeed
-                    Layout.fillWidth:   true
-                }
-                FactTextField {
-                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingCruiseSpeed
-                    visible:                _showCruiseSpeed
-                    Layout.preferredWidth:  _fieldWidth
-                }
+////                QGCLabel {
+////                    text:               qsTr("Cruise speed")
+////                    visible:            _showCruiseSpeed
+////                    Layout.fillWidth:   true
+////                }
+//                FactTextField {
+//                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingCruiseSpeed
+//                    visible:                _showCruiseSpeed
+//                    Layout.preferredWidth:  _fieldWidth
+//                }
 
-                QGCLabel {
-                    text:               qsTr("Hover speed")
-                    visible:            _showHoverSpeed
-                    Layout.fillWidth:   true
-                }
-                FactTextField {
-                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingHoverSpeed
-                    visible:                _showHoverSpeed
-                    Layout.preferredWidth:  _fieldWidth
-                }
-            } // GridLayout
+////                QGCLabel {
+////                    text:               qsTr("Hover speed")
+////                    visible:            _showHoverSpeed
+////                    Layout.fillWidth:   true
+////                }
+//                FactTextField {
+//                    fact:                   QGroundControl.settingsManager.appSettings.offlineEditingHoverSpeed
+//                    visible:                _showHoverSpeed
+//                    Layout.preferredWidth:  _fieldWidth
+//                }
+//            } // GridLayout
 
-            SectionHeader {
-                id:             plannedHomePositionSection
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-                text:           qsTr("Launch Position")
-                visible:        !_vehicleHasHomePosition
-                checked:        false
-            }
+//            SectionHeader {
+//                id:             plannedHomePositionSection
+//                anchors.left:   parent.left
+//                anchors.right:  parent.right
+//                text:           qsTr("نقطه شروع")
+//                visible:        !_vehicleHasHomePosition
+//                checked:        false
+//            }
 
-            Column {
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-                spacing:        _margin
-                visible:        plannedHomePositionSection.checked && !_vehicleHasHomePosition
+//            Column {
+//                anchors.left:   parent.left
+//                anchors.right:  parent.right
+//                spacing:        _margin
+//                visible:        plannedHomePositionSection.checked && !_vehicleHasHomePosition
 
-                GridLayout {
-                    anchors.left:   parent.left
-                    anchors.right:  parent.right
-                    columnSpacing:  ScreenTools.defaultFontPixelWidth
-                    rowSpacing:     columnSpacing
-                    columns:        2
+//                GridLayout {
+//                    anchors.left:   parent.left
+//                    anchors.right:  parent.right
+//                    columnSpacing:  ScreenTools.defaultFontPixelWidth
+//                    rowSpacing:     columnSpacing
+//                    columns:        2
 
-                    QGCLabel {
-                        text: qsTr("Altitude")
-                    }
-                    FactTextField {
-                        fact:               missionItem.plannedHomePositionAltitude
-                        Layout.fillWidth:   true
-                    }
-                }
+//                    QGCLabel {
+//                        text: qsTr("ارتفاع")
+//                    }
+//                    FactTextField {
+//                        fact:               missionItem.plannedHomePositionAltitude
+//                        Layout.fillWidth:   true
+//                    }
+//                }
 
-                QGCLabel {
-                    width:                  parent.width
-                    wrapMode:               Text.WordWrap
-                    font.pointSize:         ScreenTools.smallFontPointSize
-                    text:                   qsTr("Actual position set by vehicle at flight time.")
-                    horizontalAlignment:    Text.AlignHCenter
-                }
+//                QGCLabel {
+//                    width:                  parent.width
+//                    wrapMode:               Text.WordWrap
+//                    font.pointSize:         ScreenTools.smallFontPointSize
+//                    text:                   qsTr("موقعیت واقعی توسط پرنده در زمان پرواز تنظیم میشود")
+//                    horizontalAlignment:    Text.AlignHCenter
+//                }
 
-                QGCButton {
-                    text:                       qsTr("Set To Map Center")
-                    onClicked:                  missionItem.coordinate = map.center
-                    anchors.horizontalCenter:   parent.horizontalCenter
-                }
-            }
+//                QGCButton {
+//                    text:                       qsTr("تنظیم در مرکز نقشه")
+//                    onClicked:                  missionItem.coordinate = map.center
+//                    anchors.horizontalCenter:   parent.horizontalCenter
+//                }
+//            }
         } // Column
     } // Column
 } // Rectangle

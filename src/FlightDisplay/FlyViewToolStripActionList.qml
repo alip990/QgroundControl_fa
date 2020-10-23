@@ -34,5 +34,16 @@ ToolStripActionList {
         GuidedActionActionList {
             guidedController: guidedActionsController
         }
+//        ToolStripAction {
+//            text:               qsTr("عملیات")
+//            iconSource:         "/qmlimages/MapSync.svg"
+//            enabled:            true
+//            visible:            true
+//            dropPanelComponent: centerMapDropPanel
+//            onTriggered:{
+//                console.log("trige mission ??????????????????????????")
+//            }
+//        }
+
     ]
 }

@@ -48,7 +48,7 @@ QGCViewDialog {
                 columns:        2
 
                 QGCLabel {
-                    text: qsTr("Latitude")
+                    text: qsTr("عرض جغرافیایی")
                 }
                 FactTextField {
                     fact:               controller.latitude
@@ -56,7 +56,7 @@ QGCViewDialog {
                 }
 
                 QGCLabel {
-                    text: qsTr("Longitude")
+                    text: qsTr("طول جغرافیایی")
                 }
                 FactTextField {
                     fact:               controller.longitude
@@ -64,7 +64,7 @@ QGCViewDialog {
                 }
 
                 QGCButton {
-                    text:               qsTr("Set Geographic")
+                    text:               qsTr("مختصات جغرافیایی را اعمال کنید")
                     Layout.alignment:   Qt.AlignRight
                     Layout.columnSpan:  2
                     onClicked: {
@@ -76,7 +76,7 @@ QGCViewDialog {
                 Item { width: 1; height: ScreenTools.defaultFontPixelHeight; Layout.columnSpan: 2}
 
                 QGCLabel {
-                    text: qsTr("Zone")
+                    text: qsTr("منطقه")
                 }
                 FactTextField {
                     fact:               controller.zone
@@ -84,7 +84,7 @@ QGCViewDialog {
                 }
 
                 QGCLabel {
-                    text: qsTr("Hemisphere")
+                    text: qsTr("نیمکره")
                 }
                 FactComboBox {
                     fact:               controller.hemisphere
@@ -93,7 +93,7 @@ QGCViewDialog {
                 }
 
                 QGCLabel {
-                    text: qsTr("Easting")
+                    text: qsTr("مختصات شرقی")
                 }
                 FactTextField {
                     fact:               controller.easting
@@ -101,7 +101,7 @@ QGCViewDialog {
                 }
 
                 QGCLabel {
-                    text: qsTr("Northing")
+                    text: qsTr("مختصات شمالی")
                 }
                 FactTextField {
                     fact:               controller.northing
@@ -109,7 +109,7 @@ QGCViewDialog {
                 }
 
                 QGCButton {
-                    text:               qsTr("Set UTM")
+                    text:               qsTr("UTM اعمال")
                     Layout.alignment:   Qt.AlignRight
                     Layout.columnSpan:  2
                     onClicked: {
@@ -129,7 +129,7 @@ QGCViewDialog {
                 }
 
                 QGCButton {
-                    text:              qsTr("Set MGRS")
+                    text:              qsTr("MGRS اعمال")
                     Layout.alignment:  Qt.AlignRight
                     Layout.columnSpan: 2
                     onClicked: {
@@ -141,7 +141,7 @@ QGCViewDialog {
                 Item { width: 1; height: ScreenTools.defaultFontPixelHeight; Layout.columnSpan: 2}
 
                 QGCButton {
-                    text:              qsTr("Set From Vehicle Position")
+                    text:              qsTr("انتخاب مکان فعلی پرنده")
                     visible:           QGroundControl.multiVehicleManager.activeVehicle && QGroundControl.multiVehicleManager.activeVehicle.coordinate.isValid
                     Layout.alignment:  Qt.AlignRight
                     Layout.columnSpan: 2

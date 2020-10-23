@@ -219,7 +219,7 @@ bool QGroundControlQmlGlobal::linesIntersect(QPointF line1A, QPointF line1B, QPo
     QPointF intersectPoint;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    auto intersect = QLineF(line1A, line1B).intersect(QLineF(line2A, line2B), &intersectPoint);
+    auto intersect = QLineF(line1A, line1B).intersects(QLineF(line2A, line2B), &intersectPoint);
 #else
     auto intersect = QLineF(line1A, line1B).intersects(QLineF(line2A, line2B), &intersectPoint);
 #endif
@@ -274,9 +274,9 @@ QString QGroundControlQmlGlobal::altitudeModeExtraUnits(AltitudeMode altMode)
         // Showing (Rel) all the time ends up being too noisy
         return QString();
     case AltitudeModeAbsolute:
-        return tr("(AMSL)");
+        return tr("(سطح دریا)");
     case AltitudeModeAboveTerrain:
-        return tr("(Abv Terr)");
+        return tr("(سطح)");
     case AltitudeModeTerrainFrame:
         return tr("(TerrF)");
     }
@@ -291,11 +291,11 @@ QString QGroundControlQmlGlobal::altitudeModeShortDescription(AltitudeMode altMo
     case AltitudeModeNone:
         return QString();
     case AltitudeModeRelative:
-        return tr("Relative To Launch");
+        return tr("نسبت به نقطه شروع");
     case AltitudeModeAbsolute:
-        return tr("Above Mean Sea Level");
+        return tr("نسبت به سطح دریا");
     case AltitudeModeAboveTerrain:
-        return tr("Above Terrain");
+        return tr("نسبت به عوارض زمین ");
     case AltitudeModeTerrainFrame:
         return tr("Terrain Frame");
     }

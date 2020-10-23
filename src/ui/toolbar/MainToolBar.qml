@@ -218,32 +218,32 @@ Rectangle {
         flickableDirection:     Flickable.HorizontalFlick
         clip:                   !valueArea.settingsUnlocked
 
-        HorizontalFactValueGrid {
-            id:                     valueArea
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            userSettingsGroup:      toolbarUserSettingsGroup
-            defaultSettingsGroup:   toolbarDefaultSettingsGroup
-            visible:                currentToolbar !== planViewToolbar
+//        HorizontalFactValueGrid {
+//            id:                     valueArea
+//            anchors.top:            parent.top
+//            anchors.bottom:         parent.bottom
+//            userSettingsGroup:      toolbarUserSettingsGroup
+//            defaultSettingsGroup:   toolbarDefaultSettingsGroup
+//            visible:                currentToolbar !== planViewToolbar
 
-            QGCMouseArea {
-                anchors.fill:   parent
-                visible:        !parent.settingsUnlocked
-                onClicked:      parent.settingsUnlocked = true
-            }
-        }
+//            QGCMouseArea {
+//                anchors.fill:   parent
+//                visible:        !parent.settingsUnlocked
+//                onClicked:      parent.settingsUnlocked = true
+//            }
+//        }
 
-        Rectangle {
-            id:                     separator2
-            anchors.margins:        ScreenTools.defaultFontPixelHeight / 2
-            anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight / 2 - 1
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            anchors.left:           valueArea.right
-            width:                  1
-            color:                  qgcPal.text
-            visible:                currentToolbar == flyViewToolbar
-        }
+//        Rectangle {
+//            id:                     separator2
+//            anchors.margins:        ScreenTools.defaultFontPixelHeight / 2
+//            anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight / 2 - 1
+//            anchors.top:            parent.top
+//            anchors.bottom:         parent.bottom
+//            anchors.left:           valueArea.right
+//            width:                  1
+//            color:                  qgcPal.text
+//            visible:                currentToolbar == flyViewToolbar
+//        }
 
         Loader {
             id:                 indicatorLoader
@@ -330,7 +330,7 @@ Rectangle {
 
         QGCLabel {
             anchors.centerIn:   parent
-            text:               qsTr("Downloading Parameters")
+            text:               qsTr("در حال دریافت اطلاعات ")
             font.pointSize:     ScreenTools.largeFontPointSize
         }
 
@@ -338,7 +338,7 @@ Rectangle {
             anchors.margins:    _margin
             anchors.right:      parent.right
             anchors.bottom:     parent.bottom
-            text:               qsTr("Click anywhere to hide")
+            text:               qsTr("برای مخفی کردن در صفحه کلیک کنید")
 
             property real _margin: ScreenTools.defaultFontPixelWidth / 2
         }
@@ -355,7 +355,7 @@ Rectangle {
         anchors.rightMargin:    ScreenTools.defaultFontPixelWidth
         anchors.right:          parent.right
         anchors.verticalCenter: parent.verticalCenter
-        text:                   qsTr("Waiting For Vehicle Connection")
+        text:                   qsTr("در حال جست وجوی پرنده")
         font.pointSize:         ScreenTools.mediumFontPointSize
         font.family:            ScreenTools.demiboldFontFamily
         color:                  qgcPal.colorRed
@@ -377,7 +377,7 @@ Rectangle {
         QGCButton {
             id:                     disconnectButton
             anchors.verticalCenter: parent.verticalCenter
-            text:                   qsTr("Disconnect")
+            text:                   qsTr("قطع اتصال")
             primary:                true
             onClicked:              _activeVehicle.disconnectInactiveVehicle()
         }
@@ -385,7 +385,7 @@ Rectangle {
         QGCLabel {
             id:                     connectionLost
             anchors.verticalCenter: parent.verticalCenter
-            text:                   qsTr("COMMUNICATION LOST")
+            text:                   qsTr("ارتباط قطع شد")
             font.pointSize:         ScreenTools.largeFontPointSize
             font.family:            ScreenTools.demiboldFontFamily
             color:                  qgcPal.colorRed

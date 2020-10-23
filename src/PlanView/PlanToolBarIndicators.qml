@@ -8,6 +8,7 @@ import QGroundControl.ScreenTools       1.0
 import QGroundControl.Controls          1.0
 import QGroundControl.FactControls      1.0
 import QGroundControl.Palette           1.0
+import QGroundControl.MultiVehicleManager   1.0
 
 // Toolbar for Plan View
 Item {
@@ -15,6 +16,9 @@ Item {
 
     property var    _planMasterController:      mainWindow.planMasterControllerPlanView
     property var    _currentMissionItem:        mainWindow.currentPlanMissionItem          ///< Mission item to display status for
+
+    property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
+    property bool   _multipleVehicles:  _activeVehicle ? QGroundControl.multiVehicleManager.vehicles.count > 1 : false
 
     property var    missionItems:               _controllerValid ? _planMasterController.missionController.visualItems : undefined
     property real   missionDistance:            _controllerValid ? _planMasterController.missionController.missionDistance : NaN
@@ -100,7 +104,7 @@ Item {
         font.pointSize:         ScreenTools.largeFontPointSize
         horizontalAlignment:    Text.AlignHCenter
         verticalAlignment:      Text.AlignVCenter
-        text:                   "Done"
+        text:                   " بارگذاری تمام شد"
         visible:                false
     }
 
@@ -113,59 +117,59 @@ Item {
         columnSpacing:          0
         columns:                4
 
-        GridLayout {
-            columns:                8
-            rowSpacing:             _rowSpacing
-            columnSpacing:          _labelToValueSpacing
-            Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
+//        GridLayout {
+//            columns:                8
+//            rowSpacing:             _rowSpacing
+//            columnSpacing:          _labelToValueSpacing
+//            Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
-            QGCLabel {
-                text:               qsTr("Selected Waypoint")
-                Layout.columnSpan:  8
-                font.pointSize:     ScreenTools.smallFontPointSize
-            }
+//            QGCLabel {
+//                text:               qsTr("مشخصات نقطه مسیر انتخاب شده ")
+//                Layout.columnSpan:  8
+//                font.pointSize:     ScreenTools.smallFontPointSize
+//            }
 
-            QGCLabel { text: qsTr("Alt diff:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _altDifferenceText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _mediumValueWidth
-            }
+//            QGCLabel { text: qsTr(":اختلاف ارتفاع"); font.pointSize: _dataFontSize; }
+//            QGCLabel {
+//                text:                   _altDifferenceText
+//                font.pointSize:         _dataFontSize
+//                Layout.minimumWidth:    _mediumValueWidth
+//            }
 
-            Item { width: 1; height: 1 }
+//            Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Azimuth:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _azimuthText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _smallValueWidth
-            }
+//            QGCLabel { text: qsTr("سمت:"); font.pointSize: _dataFontSize; }
+//            QGCLabel {
+//                text:                   _azimuthText
+//                font.pointSize:         _dataFontSize
+//                Layout.minimumWidth:    _smallValueWidth
+//            }
 
-            Item { width: 1; height: 1 }
+//            Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Distance:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _distanceText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _largeValueWidth
-            }
+//            QGCLabel { text: qsTr("فاصله:"); font.pointSize: _dataFontSize; }
+//            QGCLabel {
+//                text:                   _distanceText
+//                font.pointSize:         _dataFontSize
+//                Layout.minimumWidth:    _largeValueWidth
+//            }
 
-            QGCLabel { text: qsTr("Gradient:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _gradientText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _mediumValueWidth
-            }
+//            QGCLabel { text: qsTr("شیب:"); font.pointSize: _dataFontSize; }
+//            QGCLabel {
+//                text:                   _gradientText
+//                font.pointSize:         _dataFontSize
+//                Layout.minimumWidth:    _mediumValueWidth
+//            }
 
-            Item { width: 1; height: 1 }
+//            Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Heading:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _headingText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _smallValueWidth
-            }
-        }
+//            QGCLabel { text: qsTr("جهت:"); font.pointSize: _dataFontSize; }
+//            QGCLabel {
+//                text:                   _headingText
+//                font.pointSize:         _dataFontSize
+//                Layout.minimumWidth:    _smallValueWidth
+//            }
+//        }
 
         GridLayout {
             columns:                5
@@ -174,33 +178,34 @@ Item {
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
-                text:               qsTr("Total Mission")
+                text:               qsTr("اطلاعات ماموریت")
                 Layout.columnSpan:  5
                 font.pointSize:     ScreenTools.smallFontPointSize
             }
 
-            QGCLabel { text: qsTr("Distance:"); font.pointSize: _dataFontSize; }
+
             QGCLabel {
                 text:                   _missionDistanceText
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
-
+            QGCLabel { text: qsTr("مسافت طی شده:"); font.pointSize: _dataFontSize; }
             Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Max telem dist:"); font.pointSize: _dataFontSize; }
+
             QGCLabel {
                 text:                   _missionMaxTelemetryText
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
+            QGCLabel { text: qsTr(" بیشترین فاصله از رادیو:"); font.pointSize: _dataFontSize; }
 
-            QGCLabel { text: qsTr("Time:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   getMissionTime()
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
+            QGCLabel { text: qsTr("زمان پرواز:"); font.pointSize: _dataFontSize; }
         }
 
         GridLayout {
@@ -211,12 +216,12 @@ Item {
             visible:                _batteryInfoAvailable
 
             QGCLabel {
-                text:               qsTr("Battery")
+                text:               qsTr("باتری")
                 Layout.columnSpan:  3
                 font.pointSize:     ScreenTools.smallFontPointSize
             }
 
-            QGCLabel { text: qsTr("Batteries required:"); font.pointSize: _dataFontSize; }
+            QGCLabel { text: qsTr("باتری مورد نیاز:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   _batteriesRequiredText
                 font.pointSize:         _dataFontSize
@@ -228,12 +233,30 @@ Item {
 
         QGCButton {
             id:          uploadButton
-            text:        _controllerDirty ? qsTr("Upload Required") : qsTr("Upload")
+            text:        _controllerDirty ? qsTr("بارگذاری نیاز است") : qsTr("بارگذاری عملیات")
             enabled:     !_controllerSyncInProgress
             visible:     !_controllerOffline && !_controllerSyncInProgress && !uploadCompleteText.visible
             primary:     _controllerDirty
             onClicked:   _planMasterController.upload()
 
+            PropertyAnimation on opacity {
+                easing.type:    Easing.OutQuart
+                from:           0.5
+                to:             1
+                loops:          Animation.Infinite
+                running:        _controllerDirty && !_controllerSyncInProgress
+                alwaysRunToEnd: true
+                duration:       2000
+            }
+        }
+        QGCButton {
+            id:          multiAgentuploadButton
+            text:        qsTr("بارگذاری عملیات روی وسیله ۳")
+            enabled:     !_controllerSyncInProgress
+            visible:     !_controllerOffline && !_controllerSyncInProgress && !uploadCompleteText.visible && _multipleVehicles
+            primary:     _controllerDirty
+            onClicked:   _planMasterController.upload_multiAgent()
+            Layout.leftMargin: 25
             PropertyAnimation on opacity {
                 easing.type:    Easing.OutQuart
                 from:           0.5
@@ -290,7 +313,7 @@ Item {
 
         QGCLabel {
             anchors.centerIn:   parent
-            text:               qsTr("Syncing Mission")
+            text:               qsTr("همگام سازی مأموریت")
             font.pointSize:     ScreenTools.largeFontPointSize
         }
 
@@ -298,7 +321,7 @@ Item {
             anchors.margins:    _margin
             anchors.right:      parent.right
             anchors.bottom:     parent.bottom
-            text:               qsTr("Click anywhere to hide")
+            text:               qsTr("برای پنهان شدن روی صفحه کلیک کنید")
 
             property real _margin: ScreenTools.defaultFontPixelWidth / 2
         }

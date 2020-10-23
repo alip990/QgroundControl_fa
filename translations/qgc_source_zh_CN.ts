@@ -10667,7 +10667,7 @@ Is this really what you want?</source>
       <location filename="../src/AutoPilotPlugins/PX4/PX4AdvancedFlightModes.qml" line="85"/>
       <location filename="../src/AutoPilotPlugins/PX4/PX4AdvancedFlightModes.qml" line="85"/>
       <source>Offboard</source>
-      <translation>板外Offboard</translation>
+      <translation>افبرد</translation>
     </message>
     <message>
       <location filename="../src/AutoPilotPlugins/PX4/PX4AdvancedFlightModes.qml" line="86"/>
@@ -10761,7 +10761,7 @@ Is this really what you want?</source>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="47"/>
       <source>Offboard</source>
-      <translation>板外Offboard</translation>
+      <translation>板外افبرد1</translation>
     </message>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="48"/>
@@ -10776,7 +10776,7 @@ Is this really what you want?</source>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="50"/>
       <source>Hold</source>
-      <translation>等待</translation>
+      <translation>هولد</translation>
     </message>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="51"/>

@@ -29,7 +29,7 @@ Rectangle {
     property var    _vehicle:                   QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle : QGroundControl.multiVehicleManager.offlineEditingVehicle
     property real   _cameraMinTriggerInterval:  _missionItem.cameraCalc.minTriggerInterval.rawValue
     property bool   _polygonDone:               false
-    property string _doneAdjusting:             qsTr("Done")
+    property string _doneAdjusting:             qsTr("انجام شد")
     property var    _missionItem:               missionItem
     property bool   _presetsAvailable:          _missionItem.presetNames.length !== 0
 
@@ -75,7 +75,7 @@ Rectangle {
                     Layout.fillWidth:       true
                     wrapMode:               Text.WordWrap
                     horizontalAlignment:    Text.AlignHCenter
-                    text:                   qsTr("Use the Polygon Tools to create the polygon which outlines your survey area.")
+                    text:                   qsTr("از ابزارهای ترسیم برای ایجاد چند ضلعی که منطقه مورد نظر شما را مشخص می کند استفاده کنید")
                 }
             }
         }
@@ -111,19 +111,19 @@ Rectangle {
                 CameraCalcGrid {
                     cameraCalc:                     _missionItem.cameraCalc
                     vehicleFlightIsFrontal:         true
-                    distanceToSurfaceLabel:         qsTr("Altitude")
+                    distanceToSurfaceLabel:         qsTr("ارتفاع")
                     distanceToSurfaceAltitudeMode:  _missionItem.followTerrain ?
                                                         QGroundControl.AltitudeModeAboveTerrain :
                                                         (_missionItem.cameraCalc.distanceToSurfaceRelative ? QGroundControl.AltitudeModeRelative : QGroundControl.AltitudeModeAbsolute)
-                    frontalDistanceLabel:           qsTr("Trigger Dist")
-                    sideDistanceLabel:              qsTr("Spacing")
+                    frontalDistanceLabel:           qsTr("فاصله تصویربرداری")
+                    sideDistanceLabel:              qsTr("فاصله خطوط")
                 }
 
                 SectionHeader {
                     id:             transectsHeader
                     anchors.left:   parent.left
                     anchors.right:  parent.right
-                    text:           qsTr("Transects")
+                    text:           qsTr("برش عرضی")
                 }
 
                 GridLayout {
@@ -134,7 +134,7 @@ Rectangle {
                     columns:        2
                     visible:        transectsHeader.checked
 
-                    QGCLabel { text: qsTr("Angle") }
+                    QGCLabel { text: qsTr("زاویه") }
                     FactTextField {
                         fact:                   _missionItem.gridAngle
                         Layout.fillWidth:       true
@@ -156,7 +156,7 @@ Rectangle {
                     }
 
                     QGCLabel {
-                        text:       qsTr("Turnaround dist")
+                        text:       qsTr("فاصله چرخش")
                     }
                     FactTextField {
                         fact:               _missionItem.turnAroundDistance
@@ -165,7 +165,7 @@ Rectangle {
                 }
 
                 QGCButton {
-                    text:               qsTr("Rotate Entry Point")
+                    text:               qsTr("نقطه ورود را بچرخان")
                     onClicked:          _missionItem.rotateEntryPoint();
                 }
 
@@ -175,56 +175,56 @@ Rectangle {
                     spacing:        _margin
                     visible:        transectsHeader.checked
 
-                    QGCOptionsComboBox {
-                        Layout.fillWidth: true
+//                    QGCOptionsComboBox {
+//                        Layout.fillWidth: true
 
-                        model: [
-                            {
-                                text:       qsTr("Hover and capture image"),
-                                fact:       _missionItem.hoverAndCapture,
-                                enabled:    !_missionItem.followTerrain,
-                                visible:    _missionItem.hoverAndCaptureAllowed
-                            },
-                            {
-                                text:       qsTr("Refly at 90 deg offset"),
-                                fact:       _missionItem.refly90Degrees,
-                                enabled:    !_missionItem.followTerrain,
-                                visible:    true
-                            },
-                            {
-                                text:       qsTr("Images in turnarounds"),
-                                fact:       _missionItem.cameraTriggerInTurnAround,
-                                enabled:    _missionItem.hoverAndCaptureAllowed ? !_missionItem.hoverAndCapture.rawValue : true,
-                                visible:    true
-                            },
-                            {
-                                text:       qsTr("Fly alternate transects"),
-                                fact:       _missionItem.flyAlternateTransects,
-                                enabled:    true,
-                                visible:    _vehicle ? (_vehicle.fixedWing || _vehicle.vtol) : false
-                            },
-                            {
-                                text:       qsTr("Relative altitude"),
-                                enabled:    _missionItem.cameraCalc.isManualCamera && !_missionItem.followTerrain,
-                                visible:    QGroundControl.corePlugin.options.showMissionAbsoluteAltitude || (!_missionItem.cameraCalc.distanceToSurfaceRelative && !_missionItem.followTerrain),
-                                checked:    _missionItem.cameraCalc.distanceToSurfaceRelative
-                            }
-                        ]
+//                        model: [
+//                            {
+//                                text:       qsTr("Hover and capture image"),
+//                                fact:       _missionItem.hoverAndCapture,
+//                                enabled:    !_missionItem.followTerrain,
+//                                visible:    _missionItem.hoverAndCaptureAllowed
+//                            },
+//                            {
+//                                text:       qsTr("Refly at 90 deg offset"),
+//                                fact:       _missionItem.refly90Degrees,
+//                                enabled:    !_missionItem.followTerrain,
+//                                visible:    true
+//                            },
+//                            {
+//                                text:       qsTr("Images in turnarounds"),
+//                                fact:       _missionItem.cameraTriggerInTurnAround,
+//                                enabled:    _missionItem.hoverAndCaptureAllowed ? !_missionItem.hoverAndCapture.rawValue : true,
+//                                visible:    true
+//                            },
+//                            {
+//                                text:       qsTr("Fly alternate transects"),
+//                                fact:       _missionItem.flyAlternateTransects,
+//                                enabled:    true,
+//                                visible:    _vehicle ? (_vehicle.fixedWing || _vehicle.vtol) : false
+//                            },
+//                            {
+//                                text:       qsTr("Relative altitude"),
+//                                enabled:    _missionItem.cameraCalc.isManualCamera && !_missionItem.followTerrain,
+//                                visible:    QGroundControl.corePlugin.options.showMissionAbsoluteAltitude || (!_missionItem.cameraCalc.distanceToSurfaceRelative && !_missionItem.followTerrain),
+//                                checked:    _missionItem.cameraCalc.distanceToSurfaceRelative
+//                            }
+//                        ]
 
-                        onItemClicked: {
-                            if (index == 4) {
-                                _missionItem.cameraCalc.distanceToSurfaceRelative = !_missionItem.cameraCalc.distanceToSurfaceRelative
-                                console.log(_missionItem.cameraCalc.distanceToSurfaceRelative)
-                            }
-                        }
-                    }
+//                        onItemClicked: {
+//                            if (index == 4) {
+//                                _missionItem.cameraCalc.distanceToSurfaceRelative = !_missionItem.cameraCalc.distanceToSurfaceRelative
+//                                console.log(_missionItem.cameraCalc.distanceToSurfaceRelative)
+//                            }
+//                        }
+//                    }
                 }
 
                 SectionHeader {
                     id:             statsHeader
                     anchors.left:   parent.left
                     anchors.right:  parent.right
-                    text:           qsTr("Statistics")
+                    text:           qsTr("اطلاعات")
                 }
 
                 TransectStyleComplexItemStats {
@@ -234,138 +234,138 @@ Rectangle {
                 }
             } // Grid Column
 
-            // Camera Tab
-            Column {
-                anchors.left:       parent.left
-                anchors.right:      parent.right
-                spacing:            _margin
-                visible:            tabBar.currentIndex === 1
+//            // Camera Tab
+//            Column {
+//                anchors.left:       parent.left
+//                anchors.right:      parent.right
+//                spacing:            _margin
+//                visible:            tabBar.currentIndex === 1
 
-                CameraCalcCamera {
-                    cameraCalc: _missionItem.cameraCalc
-                }
-            } // Camera Column
+//                CameraCalcCamera {
+//                    cameraCalc: _missionItem.cameraCalc
+//                }
+//            } // Camera Column
 
-            // Terrain Tab
-            TransectStyleComplexItemTerrainFollow {
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-                spacing:        _margin
-                visible:        tabBar.currentIndex === 2
-                missionItem:    _missionItem
-            }
+//            // Terrain Tab
+//            TransectStyleComplexItemTerrainFollow {
+//                anchors.left:   parent.left
+//                anchors.right:  parent.right
+//                spacing:        _margin
+//                visible:        tabBar.currentIndex === 2
+//                missionItem:    _missionItem
+//            }
 
-            // Presets Tab
-            ColumnLayout {
-                anchors.left:       parent.left
-                anchors.right:      parent.right
-                spacing:            _margin
-                visible:            tabBar.currentIndex === 3
+//            // Presets Tab
+//            ColumnLayout {
+//                anchors.left:       parent.left
+//                anchors.right:      parent.right
+//                spacing:            _margin
+//                visible:            tabBar.currentIndex === 3
 
-                QGCLabel {
-                    Layout.fillWidth:   true
-                    text:               qsTr("Presets")
-                    wrapMode:           Text.WordWrap
-                }
+//                QGCLabel {
+//                    Layout.fillWidth:   true
+//                    text:               qsTr("Presets")
+//                    wrapMode:           Text.WordWrap
+//                }
 
-                QGCComboBox {
-                    id:                 presetCombo
-                    Layout.fillWidth:   true
-                    model:              _missionItem.presetNames
-                }
+//                QGCComboBox {
+//                    id:                 presetCombo
+//                    Layout.fillWidth:   true
+//                    model:              _missionItem.presetNames
+//                }
 
-                RowLayout {
-                    Layout.fillWidth:   true
+//                RowLayout {
+//                    Layout.fillWidth:   true
 
-                    QGCButton {
-                        Layout.fillWidth:   true
-                        text:               qsTr("Apply Preset")
-                        enabled:            _missionItem.presetNames.length != 0
-                        onClicked:          _missionItem.loadPreset(presetCombo.textAt(presetCombo.currentIndex))
-                    }
+//                    QGCButton {
+//                        Layout.fillWidth:   true
+//                        text:               qsTr("Apply Preset")
+//                        enabled:            _missionItem.presetNames.length != 0
+//                        onClicked:          _missionItem.loadPreset(presetCombo.textAt(presetCombo.currentIndex))
+//                    }
 
-                    QGCButton {
-                        Layout.fillWidth:   true
-                        text:               qsTr("Delete Preset")
-                        enabled:            _missionItem.presetNames.length != 0
-                        onClicked:          mainWindow.showComponentDialog(deletePresetMessage, qsTr("Delete Preset"), mainWindow.showDialogDefaultWidth, StandardButton.Yes | StandardButton.No)
+//                    QGCButton {
+//                        Layout.fillWidth:   true
+//                        text:               qsTr("Delete Preset")
+//                        enabled:            _missionItem.presetNames.length != 0
+//                        onClicked:          mainWindow.showComponentDialog(deletePresetMessage, qsTr("Delete Preset"), mainWindow.showDialogDefaultWidth, StandardButton.Yes | StandardButton.No)
 
-                        Component {
-                            id: deletePresetMessage
-                            QGCViewMessage {
-                                message: qsTr("Are you sure you want to delete '%1' preset?").arg(presetName)
-                                property string presetName: presetCombo.textAt(presetCombo.currentIndex)
-                                function accept() {
-                                    _missionItem.deletePreset(presetName)
-                                    hideDialog()
-                                }
-                            }
-                        }
-                    }
-                }
+//                        Component {
+//                            id: deletePresetMessage
+//                            QGCViewMessage {
+//                                message: qsTr("Are you sure you want to delete '%1' preset?").arg(presetName)
+//                                property string presetName: presetCombo.textAt(presetCombo.currentIndex)
+//                                function accept() {
+//                                    _missionItem.deletePreset(presetName)
+//                                    hideDialog()
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
 
-                Item { height: ScreenTools.defaultFontPixelHeight; width: 1 }
+//                Item { height: ScreenTools.defaultFontPixelHeight; width: 1 }
 
-                QGCButton {
-                    Layout.alignment:   Qt.AlignCenter
-                    Layout.fillWidth:   true
-                    text:               qsTr("Save Settings As New Preset")
-                    onClicked:          mainWindow.showComponentDialog(savePresetDialog, qsTr("Save Preset"), mainWindow.showDialogDefaultWidth, StandardButton.Save | StandardButton.Cancel)
-                }
+//                QGCButton {
+//                    Layout.alignment:   Qt.AlignCenter
+//                    Layout.fillWidth:   true
+//                    text:               qsTr("Save Settings As New Preset")
+//                    onClicked:          mainWindow.showComponentDialog(savePresetDialog, qsTr("Save Preset"), mainWindow.showDialogDefaultWidth, StandardButton.Save | StandardButton.Cancel)
+//                }
 
-                SectionHeader {
-                    id:                 presectsTransectsHeader
-                    Layout.fillWidth:   true
-                    text:               qsTr("Transects")
-                }
+//                SectionHeader {
+//                    id:                 presectsTransectsHeader
+//                    Layout.fillWidth:   true
+//                    text:               qsTr("برش عرضی")
+//                }
 
-                GridLayout {
-                    Layout.fillWidth:   true
-                    columnSpacing:      _margin
-                    rowSpacing:         _margin
-                    columns:            2
-                    visible:            presectsTransectsHeader.checked
+//                GridLayout {
+//                    Layout.fillWidth:   true
+//                    columnSpacing:      _margin
+//                    rowSpacing:         _margin
+//                    columns:            2
+//                    visible:            presectsTransectsHeader.checked
 
-                    QGCLabel { text: qsTr("Angle") }
-                    FactTextField {
-                        fact:                   _missionItem.gridAngle
-                        Layout.fillWidth:       true
-                        onUpdated:              presetsAngleSlider.value = _missionItem.gridAngle.value
-                    }
+//                    QGCLabel { text: qsTr("زاویه") }
+//                    FactTextField {
+//                        fact:                   _missionItem.gridAngle
+//                        Layout.fillWidth:       true
+//                        onUpdated:              presetsAngleSlider.value = _missionItem.gridAngle.value
+//                    }
 
-                    QGCSlider {
-                        id:                     presetsAngleSlider
-                        minimumValue:           0
-                        maximumValue:           359
-                        stepSize:               1
-                        tickmarksEnabled:       false
-                        Layout.fillWidth:       true
-                        Layout.columnSpan:      2
-                        Layout.preferredHeight: ScreenTools.defaultFontPixelHeight * 1.5
-                        onValueChanged:         _missionItem.gridAngle.value = value
-                        Component.onCompleted:  value = _missionItem.gridAngle.value
-                        updateValueWhileDragging: true
-                    }
+//                    QGCSlider {
+//                        id:                     presetsAngleSlider
+//                        minimumValue:           0
+//                        maximumValue:           359
+//                        stepSize:               1
+//                        tickmarksEnabled:       false
+//                        Layout.fillWidth:       true
+//                        Layout.columnSpan:      2
+//                        Layout.preferredHeight: ScreenTools.defaultFontPixelHeight * 1.5
+//                        onValueChanged:         _missionItem.gridAngle.value = value
+//                        Component.onCompleted:  value = _missionItem.gridAngle.value
+//                        updateValueWhileDragging: true
+//                    }
 
-                    QGCButton {
-                        Layout.columnSpan:  2
-                        Layout.fillWidth:   true
-                        text:               qsTr("Rotate Entry Point")
-                        onClicked:          _missionItem.rotateEntryPoint();
-                    }
-                }
+//                    QGCButton {
+//                        Layout.columnSpan:  2
+//                        Layout.fillWidth:   true
+//                        text:               qsTr("نقطه ورود را بچرخان")
+//                        onClicked:          _missionItem.rotateEntryPoint();
+//                    }
+//                }
 
-                SectionHeader {
-                    id:                 presetsStatsHeader
-                    Layout.fillWidth:   true
-                    text:               qsTr("Statistics")
-                }
+//                SectionHeader {
+//                    id:                 presetsStatsHeader
+//                    Layout.fillWidth:   true
+//                    text:               qsTr("اطلاعات")
+//                }
 
-                TransectStyleComplexItemStats {
-                    Layout.fillWidth:   true
-                    visible:            presetsStatsHeader.checked
-                }
-            } // Main editing column
+//                TransectStyleComplexItemStats {
+//                    Layout.fillWidth:   true
+//                    visible:            presetsStatsHeader.checked
+//                }
+//            } // Main editing column
         } // Top level  Column
 
         Component {

@@ -55,11 +55,11 @@ WindowsBuild {
 # Branding
 #
 
-QGC_APP_NAME        = "QGroundControl"
-QGC_ORG_NAME        = "QGroundControl.org"
+QGC_APP_NAME        = "ایستگاه زمینی"
+QGC_ORG_NAME        = "بهکو"
 QGC_ORG_DOMAIN      = "org.qgroundcontrol"
-QGC_APP_DESCRIPTION = "Open source ground control app provided by QGroundControl dev team"
-QGC_APP_COPYRIGHT   = "Copyright (C) 2019 QGroundControl Development Team. All rights reserved."
+QGC_APP_DESCRIPTION = "محصولی از بهکو"
+QGC_APP_COPYRIGHT   = "Copyright (C) 2019 behko Development Team. All rights reserved."
 
 WindowsBuild {
     QGC_INSTALLER_ICON          = "$$SOURCE_DIR\\WindowsQGC.ico"

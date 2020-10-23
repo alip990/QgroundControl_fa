@@ -289,8 +289,10 @@ ApplicationWindow {
 
     MessageDialog {
         id:                 unsavedMissionCloseDialog
-        title:              qsTr("%1 close").arg(QGroundControl.appName)
-        text:               qsTr("You have a mission edit in progress which has not been saved/sent. If you close you will lose changes. Are you sure you want to close?")
+     //   title:              qsTr("%1 بستن").arg(QGroundControl.appName)
+        title:              QGroundControl.appName
+        text:               qsTr("شما یک  مأموریت در حال ویرایش دارید که ذخیره / ارسال نشده است. اگر ببندید تغییرات را از دست خواهید داد. آیا مطمئن هستید که می خواهید ببندید
+?")
         standardButtons:    StandardButton.Yes | StandardButton.No
         modality:           Qt.ApplicationModal
         visible:            false
@@ -306,8 +308,8 @@ ApplicationWindow {
 
     MessageDialog {
         id:                 pendingParameterWritesCloseDialog
-        title:              qsTr("%1 close").arg(QGroundControl.appName)
-        text:               qsTr("You have pending parameter updates to a vehicle. If you close you will lose changes. Are you sure you want to close?")
+        title:              QGroundControl.appName
+        text:               qsTr("شما در حال به روزرسانی پارامتر پرنده هستید. اگر ببندید تغییرات را از دست خواهید داد. آیا مطمئن هستید که می خواهید ببندید?")
         standardButtons:    StandardButton.Yes | StandardButton.No
         modality:           Qt.ApplicationModal
         visible:            false
@@ -326,7 +328,7 @@ ApplicationWindow {
     MessageDialog {
         id:                 activeConnectionsCloseDialog
         title:              qsTr("%1 close").arg(QGroundControl.appName)
-        text:               qsTr("There are still active connections to vehicles. Are you sure you want to exit?")
+        text:               qsTr("ارتباط با پرنده هنوز برقرار است ایا میخواهید خارج شوید")
         standardButtons:    StandardButton.Yes | StandardButton.Cancel
         modality:           Qt.ApplicationModal
         visible:            false

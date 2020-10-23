@@ -36,16 +36,17 @@ DEFINES += CUSTOMHEADER=\"\\\"CustomPlugin.h\\\"\"
 DEFINES += CUSTOMCLASS=CustomPlugin
 
 TARGET   = CustomQGroundControl
-DEFINES += QGC_APPLICATION_NAME='"\\\"Custom QGroundControl\\\""'
+DEFINES += QGC_APPLICATION_NAME='"\\\"ایستگاه زمینی پرنده\\\""'
 
 DEFINES += QGC_ORG_NAME=\"\\\"qgroundcontrol.org\\\"\"
 DEFINES += QGC_ORG_DOMAIN=\"\\\"org.qgroundcontrol\\\"\"
 
-QGC_APP_NAME        = "Custom QGroundControl"
-QGC_BINARY_NAME     = "CustomQGroundControl"
-QGC_ORG_NAME        = "Custom"
+QGC_APP_NAME        = "ایستگاه زمینی"
+QGC_BINARY_NAME     = "ایستگاه زمینی"
+QGC_ORG_NAME        = "behko"
 QGC_ORG_DOMAIN      = "org.custom"
-QGC_APP_DESCRIPTION = "Custom QGroundControl"
+QGC_ANDROID_PACKAGE = "org.custom.qgroundcontrol"
+QGC_APP_DESCRIPTION = "ایستگاه زمینی"
 QGC_APP_COPYRIGHT   = "Copyright (C) 2020 QGroundControl Development Team. All rights reserved."
 
 # Our own, custom resources
@@ -54,14 +55,6 @@ RESOURCES += \
 
 QML_IMPORT_PATH += \
    $$PWD/res
-
-LinuxBuild {
-
-    # Our QT_INSTALL_LIBS
-    QT_LIB_LIST += \
-        libQt5VirtualKeyboard.so.5 \
-
-}
 
 # Our own, custom sources
 SOURCES += \

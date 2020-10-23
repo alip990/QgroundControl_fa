@@ -174,12 +174,12 @@ Item {
         }
 
         function waitingOnIncompleteDataMessage(save) {
-            var saveOrUpload = save ? qsTr("Save") : qsTr("Upload")
+            var saveOrUpload = save ? qsTr("ذخیره") : qsTr("بارگذاری")
             mainWindow.showMessageDialog(qsTr("Unable to %1").arg(saveOrUpload), qsTr("Plan has incomplete items. Complete all items and %1 again.").arg(saveOrUpload))
         }
 
         function waitingOnTerrainDataMessage(save) {
-            var saveOrUpload = save ? qsTr("Save") : qsTr("Upload")
+            var saveOrUpload = save ? qsTr("ذخیره") : qsTr("بارگذاری")
             mainWindow.showMessageDialog(qsTr("Unable to %1").arg(saveOrUpload), qsTr("Plan is waiting on terrain data from server for correct altitude values."))
         }
 
@@ -201,6 +201,28 @@ Item {
             switch (_missionController.sendToVehiclePreCheck()) {
                 case MissionController.SendToVehiclePreCheckStateOk:
                     sendToVehicle()
+                    //sendToVehicle_multi_agent(10)
+
+                    //console.log("in line 204 of planeview  علیرضا  ***************************************** \n ****************************")
+                    break
+                case MissionController.SendToVehiclePreCheckStateActiveMission:
+                    mainWindow.showMessageDialog(qsTr("Send To Vehicle"), qsTr("Current mission must be paused prior to uploading a new Plan"))
+                    break
+                case MissionController.SendToVehiclePreCheckStateFirwmareVehicleMismatch:
+                    mainWindow.showComponentDialog(firmwareOrVehicleMismatchUploadDialogComponent, qsTr("Plan Upload"), mainWindow.showDialogDefaultWidth, StandardButton.Ok | StandardButton.Cancel)
+                    break
+            }
+        }
+        function upload_multiAgent() {
+            if (!checkReadyForSaveUpload(false /* save */)) {
+                return
+            }
+            switch (_missionController.sendToVehiclePreCheck()) {
+                case MissionController.SendToVehiclePreCheckStateOk:
+                    sendToVehicle_multiAgent(44)
+                    //sendToVehicle_multi_agent(10)
+
+                    //console.log("in line 204 of planeview  علیرضا  ***************************************** \n ****************************")
                     break
                 case MissionController.SendToVehiclePreCheckStateActiveMission:
                     mainWindow.showMessageDialog(qsTr("Send To Vehicle"), qsTr("Current mission must be paused prior to uploading a new Plan"))
@@ -567,7 +589,7 @@ Item {
             anchors.top:        parent.top
             z:                  QGroundControl.zOrderWidgets
             maxHeight:          parent.height - toolStrip.y
-            title:              qsTr("Plan")
+            title:              qsTr("طرح")
 
             //readonly property int flyButtonIndex:       0
             readonly property int fileButtonIndex:      0
@@ -585,7 +607,7 @@ Item {
                 id: toolStripActionList
                 model: [
                     ToolStripAction {
-                        text:                   qsTr("File")
+                        text:                   qsTr("هماهنگی")
                         enabled:                !_planMasterController.syncInProgress
                         visible:                true
                         showAlternateIcon:      _planMasterController.dirty
@@ -594,7 +616,7 @@ Item {
                         dropPanelComponent:     syncDropPanel
                     },
                     ToolStripAction {
-                        text:       qsTr("Takeoff")
+                        text:       qsTr("برخاستن")
                         iconSource: "/res/takeoff.svg"
                         enabled:    _missionController.isInsertTakeoffValid
                         visible:    toolStrip._isMissionLayer
@@ -604,7 +626,7 @@ Item {
                         }
                     },
                     ToolStripAction {
-                        text:               _editingLayer == _layerRallyPoints ? qsTr("Rally Point") : qsTr("Waypoint")
+                        text:               _editingLayer == _layerRallyPoints ? qsTr("Rally Point") : qsTr("نقطه مسیر")
                         iconSource:         "/qmlimages/MapAddMission.svg"
                         enabled:            toolStrip._isRallyLayer ? true : _missionController.flyThroughCommandsAllowed
                         visible:            toolStrip._isRallyLayer || toolStrip._isMissionLayer
@@ -613,37 +635,38 @@ Item {
                         property bool myAddWaypointOnClick: _addWaypointOnClick
                         onMyAddWaypointOnClickChanged: checked = _addWaypointOnClick
                     },
+//                    ToolStripAction {
+//                        text:               _missionController.isROIActive ? qsTr("نقطه زیر نظر را غیرفعال کنید") : qsTr("نقطه زیر نظر")
+//                        iconSource:         "/qmlimages/MapAddMission.svg"
+//                        enabled:            !_missionController.onlyInsertTakeoffValid
+//                        visible:            toolStrip._isMissionLayer && _planMasterController.controllerVehicle.roiModeSupported
+//                        checkable:          !_missionController.isROIActive
+//                        onCheckedChanged:   _addROIOnClick = checked
+//                        onTriggered: {
+//                            if (_missionController.isROIActive) {
+//                                toolStrip.allAddClickBoolsOff()
+//                                insertCancelROIAfterCurrent()
+//                            }
+//                        }
+//                        property bool myAddROIOnClick: _addROIOnClick
+//                        onMyAddROIOnClickChanged: checked = _addROIOnClick
+//                    },
                     ToolStripAction {
-                        text:               _missionController.isROIActive ? qsTr("Cancel ROI") : qsTr("ROI")
-                        iconSource:         "/qmlimages/MapAddMission.svg"
-                        enabled:            !_missionController.onlyInsertTakeoffValid
-                        visible:            toolStrip._isMissionLayer && _planMasterController.controllerVehicle.roiModeSupported
-                        checkable:          !_missionController.isROIActive
-                        onCheckedChanged:   _addROIOnClick = checked
-                        onTriggered: {
-                            if (_missionController.isROIActive) {
-                                toolStrip.allAddClickBoolsOff()
-                                insertCancelROIAfterCurrent()
-                            }
-                        }
-                        property bool myAddROIOnClick: _addROIOnClick
-                        onMyAddROIOnClickChanged: checked = _addROIOnClick
-                    },
-                    ToolStripAction {
-                        text:               _singleComplexItem ? _missionController.complexMissionItemNames[0] : qsTr("Pattern")
+                     //   text:               _singleComplexItem ? _missionController.complexMissionItemNames[0] : qsTr("الگو")
+                        text : qsTr("الگو")
                         iconSource:         "/qmlimages/MapDrawShape.svg"
                         enabled:            _missionController.flyThroughCommandsAllowed
                         visible:            toolStrip._isMissionLayer
                         dropPanelComponent: _singleComplexItem ? undefined : patternDropPanel
                         onTriggered: {
-                            toolStrip.allAddClickBoolsOff()
+                      //      toolStrip.allAddClickBoolsOff()
                             if (_singleComplexItem) {
                                 insertComplexItemAfterCurrent(_missionController.complexMissionItemNames[0])
                             }
                         }
                     },
                     ToolStripAction {
-                        text:       _planMasterController.controllerVehicle.multiRotor ? qsTr("Return") : qsTr("Land")
+                        text:       _planMasterController.controllerVehicle.multiRotor ? qsTr("بازگشت") : qsTr("فرود")
                         iconSource: "/res/rtl.svg"
                         enabled:    _missionController.isInsertLandValid
                         visible:    toolStrip._isMissionLayer
@@ -651,14 +674,8 @@ Item {
                             toolStrip.allAddClickBoolsOff()
                             insertLandItemAfterCurrent()
                         }
-                    },
-                    ToolStripAction {
-                        text:               qsTr("Center")
-                        iconSource:         "/qmlimages/MapCenter.svg"
-                        enabled:            true
-                        visible:            true
-                        dropPanelComponent: centerMapDropPanel
                     }
+
                 ]
             }
 
@@ -730,7 +747,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                         }
                         QGCLabel {
-                            text:               qsTr("Plan")
+                            text:               qsTr("طرح")
                             color:              qgcPal.text
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -762,16 +779,17 @@ Item {
                     visible:    (!planControlColapsed || !_airspaceEnabled) && QGroundControl.corePlugin.options.enablePlanViewSelector
                     Component.onCompleted: currentIndex = 0
                     QGCTabButton {
-                        text:       qsTr("Mission")
+                        text:       qsTr("ماموریت")
                     }
-                    QGCTabButton {
-                        text:       qsTr("Fence")
-                        enabled:    _geoFenceController.supported
-                    }
-                    QGCTabButton {
-                        text:       qsTr("Rally")
-                        enabled:    _rallyPointController.supported
-                    }
+//                    QGCTabButton {
+//                        text:       qsTr("Fence")
+//                        enabled:    _geoFenceController.supported
+//                    }
+//                    QGCTabButton {
+//                        text:       qsTr("Rally")
+//                        enabled:    _rallyPointController.supported
+//                    }
+
                 }
             }
             //-------------------------------------------------------
@@ -887,7 +905,7 @@ Item {
         id: syncLoadFromVehicleOverwrite
         QGCViewMessage {
             id:         syncLoadFromVehicleCheck
-            message:   qsTr("You have unsaved/unsent changes. Loading from the Vehicle will lose these changes. Are you sure you want to load from the Vehicle?")
+            message:   qsTr("هنوز ماموریت فعلی ذخیره نشده است ایا مایل اید ماموریت دیگری از وسیله دانلود شود؟")
             function accept() {
                 hideDialog()
                 _planMasterController.loadFromVehicle()
@@ -899,7 +917,7 @@ Item {
         id: syncLoadFromFileOverwrite
         QGCViewMessage {
             id:         syncLoadFromVehicleCheck
-            message:   qsTr("You have unsaved/unsent changes. Loading from a file will lose these changes. Are you sure you want to load from a file?")
+            message:   qsTr("هنوز ماموریت فعلی ذخیره نشده است ایا مایل اید ماموریت دیگری از فایل اورده شود ؟ ")
             function accept() {
                 hideDialog()
                 _planMasterController.loadFromSelectedFile()
@@ -912,7 +930,7 @@ Item {
     Component {
         id: createPlanRemoveAllPromptDialog
         QGCViewMessage {
-            message: qsTr("Are you sure you want to remove current plan and create a new plan? ")
+            message: qsTr("طرح فعلی ذخیره نشده است ایا مایل اید طرح دیگری جایگزین کنید؟ ")
             function accept() {
                 createPlanRemoveAllPromptDialogPlanCreator.createPlan(createPlanRemoveAllPromptDialogMapCenter)
                 hideDialog()
@@ -923,7 +941,7 @@ Item {
     Component {
         id: clearVehicleMissionDialog
         QGCViewMessage {
-            message: qsTr("Are you sure you want to remove all mission items and clear the mission from the vehicle?")
+            message: qsTr("ایا میخواهید ماموریت را کاملا از حافظه پرنده پاک کنید؟")
             function accept() {
                 _planMasterController.removeAllFromVehicle()
                 _missionController.setCurrentPlanViewSeqNum(0, true)
@@ -949,7 +967,7 @@ Item {
         ColumnLayout {
             spacing:    ScreenTools.defaultFontPixelWidth * 0.5
 
-            QGCLabel { text: qsTr("Create complex pattern:") }
+            QGCLabel { text: qsTr("یک الگوی بسازید") }
 
             Repeater {
                 model: _missionController.complexMissionItemNames
@@ -974,7 +992,7 @@ Item {
             id:         columnHolder
             spacing:    _margin
 
-            property string _overwriteText: (_editingLayer == _layerMission) ? qsTr("Mission overwrite") : ((_editingLayer == _layerGeoFence) ? qsTr("GeoFence overwrite") : qsTr("Rally Points overwrite"))
+            property string _overwriteText: (_editingLayer == _layerMission) ? qsTr("ذخیره دوباره ماموریت") : ((_editingLayer == _layerGeoFence) ? qsTr("GeoFence overwrite") : qsTr("Rally Points overwrite"))
 
             QGCLabel {
                 id:                 unsavedChangedLabel
@@ -989,7 +1007,7 @@ Item {
             SectionHeader {
                 id:                 createSection
                 Layout.fillWidth:   true
-                text:               qsTr("Create Plan")
+                text:               qsTr("ایجاد طرح")
                 showSpacer:         false
             }
 
@@ -1060,7 +1078,7 @@ Item {
             SectionHeader {
                 id:                 storageSection
                 Layout.fillWidth:   true
-                text:               qsTr("Storage")
+                text:               qsTr("حافظه")
             }
 
             GridLayout {
@@ -1081,7 +1099,7 @@ Item {
                 }*/
 
                 QGCButton {
-                    text:               qsTr("Open...")
+                    text:               qsTr("بازکردن...")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress
                     onClicked: {
@@ -1095,7 +1113,7 @@ Item {
                 }
 
                 QGCButton {
-                    text:               qsTr("Save")
+                    text:               qsTr("ذخیره")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress && _planMasterController.currentPlanFile !== ""
                     onClicked: {
@@ -1109,7 +1127,7 @@ Item {
                 }
 
                 QGCButton {
-                    text:               qsTr("Save As...")
+                    text:               qsTr("ذخیره در")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress && _planMasterController.containsItems
                     onClicked: {
@@ -1121,7 +1139,7 @@ Item {
                 QGCButton {
                     Layout.columnSpan:  3
                     Layout.fillWidth:   true
-                    text:               qsTr("Save Mission Waypoints As KML...")
+                    text:               qsTr(" KML ذخیزه نقطه مسیر ها با فرمت ")
                     enabled:            !_planMasterController.syncInProgress && _visualItems.count > 1
                     onClicked: {
                         // First point does not count
@@ -1138,7 +1156,7 @@ Item {
             SectionHeader {
                 id:                 vehicleSection
                 Layout.fillWidth:   true
-                text:               qsTr("Vehicle")
+                text:               qsTr("پرنده")
             }
 
             RowLayout {
@@ -1147,7 +1165,7 @@ Item {
                 visible:            vehicleSection.visible
 
                 QGCButton {
-                    text:               qsTr("Upload")
+                    text:               qsTr("بارگذاری")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress && _planMasterController.containsItems
                     visible:            !QGroundControl.corePlugin.options.disableVehicleConnection
@@ -1158,7 +1176,7 @@ Item {
                 }
 
                 QGCButton {
-                    text:               qsTr("Download")
+                    text:               qsTr("دریافت")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress
                     visible:            !QGroundControl.corePlugin.options.disableVehicleConnection
@@ -1173,7 +1191,7 @@ Item {
                 }
 
                 QGCButton {
-                    text:               qsTr("Clear")
+                    text:               qsTr("پاک کردن")
                     Layout.fillWidth:   true
                     Layout.columnSpan:  2
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress

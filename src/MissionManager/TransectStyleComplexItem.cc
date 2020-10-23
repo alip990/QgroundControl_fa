@@ -933,6 +933,7 @@ void TransectStyleComplexItem::appendMissionItems(QList<MissionItem*>& items, QO
     }
 }
 
+
 void TransectStyleComplexItem::_appendWaypoint(QList<MissionItem*>& items, QObject* missionItemParent, int& seqNum, MAV_FRAME mavFrame, float holdTime, const QGeoCoordinate& coordinate)
 {
     MissionItem* item = new MissionItem(seqNum++,

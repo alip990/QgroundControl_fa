@@ -94,58 +94,58 @@ Popup {
         rejectButton.visible = false
         // Accept role buttons
         if (buttons & StandardButton.Ok) {
-            acceptButton.text = qsTr("Ok")
+            acceptButton.text = qsTr("بله")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Open) {
-            acceptButton.text = qsTr("Open")
+            acceptButton.text = qsTr("بازکردن")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Save) {
-            acceptButton.text = qsTr("Save")
+            acceptButton.text = qsTr("ذخیره ")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Apply) {
-            acceptButton.text = qsTr("Apply")
+            acceptButton.text = qsTr("اعمال")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Open) {
-            acceptButton.text = qsTr("Open")
+            acceptButton.text = qsTr("بازکردن")
             acceptButton.visible = true
         } else if (buttons & StandardButton.SaveAll) {
-            acceptButton.text = qsTr("Save All")
+            acceptButton.text = qsTr("ذخیره همه")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Yes) {
-            acceptButton.text = qsTr("Yes")
+            acceptButton.text = qsTr("بله")
             acceptButton.visible = true
         } else if (buttons & StandardButton.YesToAll) {
-            acceptButton.text = qsTr("Yes to All")
+            acceptButton.text = qsTr("بله برای همه")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Retry) {
-            acceptButton.text = qsTr("Retry")
+            acceptButton.text = qsTr("امتحان دوباره")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Reset) {
-            acceptButton.text = qsTr("Reset")
+            acceptButton.text = qsTr("بازنشانی")
             acceptButton.visible = true
         } else if (buttons & StandardButton.RestoreToDefaults) {
-            acceptButton.text = qsTr("Restore to Defaults")
+            acceptButton.text = qsTr("بازنشانی به پیشفرض")
             acceptButton.visible = true
         } else if (buttons & StandardButton.Ignore) {
-            acceptButton.text = qsTr("Ignore")
+            acceptButton.text = qsTr("نادیده گرفتن")
             acceptButton.visible = true
         }
 
         // Reject role buttons
         if (buttons & StandardButton.Cancel) {
-            rejectButton.text = qsTr("Cancel")
+            rejectButton.text = qsTr("لغو")
             rejectButton.visible = true
         } else if (buttons & StandardButton.Close) {
-            rejectButton.text = qsTr("Close")
+            rejectButton.text = qsTr("بستن")
             rejectButton.visible = true
         } else if (buttons & StandardButton.No) {
-            rejectButton.text = qsTr("No")
+            rejectButton.text = qsTr("خیر")
             rejectButton.visible = true
         } else if (buttons & StandardButton.NoToAll) {
-            rejectButton.text = qsTr("No to All")
+            rejectButton.text = qsTr("خیر برای همه")
             rejectButton.visible = true
         } else if (buttons & StandardButton.Abort) {
-            rejectButton.text = qsTr("Abort")
+            rejectButton.text = qsTr("لغو")
             rejectButton.visible = true
         }
 

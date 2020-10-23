@@ -70,20 +70,20 @@ Item {
         guidedController:       _root.guidedActionsController
     }
 
-    FlyViewInstrumentPanel {
-        id:                         instrumentPanel
-        anchors.margins:            _toolsMargin
-        anchors.top:                parent.top
-        anchors.bottom:             parent.bottom
-        anchors.right:              parent.right
-        width:                      _rightPanelWidth
-        spacing:                    _toolsMargin
-        visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel
-        guidedActionsController:    _guidedController
-        availableHeight:            parent.height - y - _toolsMargin
+//    FlyViewInstrumentPanel {
+//        id:                         instrumentPanel
+//        anchors.margins:            _toolsMargin
+//        anchors.top:                parent.top
+//        anchors.bottom:             parent.bottom
+//        anchors.right:              parent.right
+//        width:                      _rightPanelWidth
+//        spacing:                    _toolsMargin
+//        visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel
+//        guidedActionsController:    _guidedController
+//        availableHeight:            parent.height - y - _toolsMargin
 
-        property real rightInset: visible ? parent.width - x : 0
-    }
+//        property real rightInset: visible ? parent.width - x : 0
+//    }
 
     //-- Virtual Joystick
     Loader {

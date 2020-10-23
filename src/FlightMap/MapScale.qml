@@ -190,8 +190,9 @@ Item {
         anchors.bottom:     rightEnd.bottom
         anchors.leftMargin: buttonsOnLeft ? 0 : ScreenTools.defaultFontPixelWidth / 2
         anchors.left:       buttonsOnLeft ? parent.left : rightEnd.right
-        text:               qsTr("T")
-        width:              height
+        text:               qsTr("نمودار ارتفاع")
+        //width:              height
+         width:              100
         opacity:            0.75
         visible:            terrainButtonVisible
         onClicked:          terrainButtonClicked()

@@ -85,7 +85,7 @@ MapQuickItem {
             property string vehicleLabelText: visible ?
                                                   (_adsbVehicle ?
                                                        QGroundControl.unitsConversion.metersToAppSettingsHorizontalDistanceUnits(altitude).toFixed(0) + " " + QGroundControl.unitsConversion.appSettingsHorizontalDistanceUnitsString :
-                                                       (_multiVehicle ? qsTr("Vehicle %1").arg(vehicle.id) : "")) :
+                                                       (_multiVehicle ? qsTr(" پرنده %1").arg(vehicle.id) : "")) :
                                                   ""
 
         }

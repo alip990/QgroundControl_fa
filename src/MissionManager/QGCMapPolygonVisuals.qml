@@ -47,8 +47,8 @@ Item {
     property real _zorderSplitHandle:   QGroundControl.zOrderMapItems + 2
     property real _zorderCenterHandle:  QGroundControl.zOrderMapItems + 1   // Lowest such that drag or split takes precedence
 
-    readonly property string _polygonToolsText: qsTr("Polygon Tools")
-    readonly property string _traceText:        qsTr("Click in the map to add vertices. Click 'Done Tracing' when finished.")
+    readonly property string _polygonToolsText: qsTr("ابزار ترسیم")
+    readonly property string _traceText:        qsTr("برای افزودن رئوس روی نقشه کلیک کنید. پس از ام روی 'انجام ترسیم' کلیک کنید")
 
     function addCommonVisuals() {
         if (_objMgrCommonVisuals.empty) {
@@ -245,7 +245,7 @@ Item {
         QGCMenuItem {
             id:             removeVertexItem
             visible:        !_circleMode
-            text:           qsTr("Remove vertex")
+            text:           qsTr("حذف نقطه")
             onTriggered: {
                 if (menu._editingVertexIndex >= 0) {
                     mapPolygon.removeVertex(menu._editingVertexIndex)
@@ -258,19 +258,19 @@ Item {
         }
 
         QGCMenuItem {
-            text:           qsTr("Set radius..." )
+            text:           qsTr("تنظیم زاویه" )
             visible:        _circleMode
             onTriggered:    _editCircleRadius = true
         }
 
         QGCMenuItem {
-            text:           qsTr("Edit position..." )
+            text:           qsTr("تغییر مکان" )
             visible:        _circleMode
             onTriggered:    mainWindow.showComponentDialog(editCenterPositionDialog, qsTr("Edit Center Position"), mainWindow.showDialogDefaultWidth, StandardButton.Close)
         }
 
         QGCMenuItem {
-            text:           qsTr("Edit position..." )
+            text:           qsTr("تغییر مکان" )
             visible:        !_circleMode && menu._editingVertexIndex >= 0
             onTriggered:    mainWindow.showComponentDialog(editVertexPositionDialog, qsTr("Edit Vertex Position"), mainWindow.showDialogDefaultWidth, StandardButton.Close)
         }
@@ -525,21 +525,21 @@ Item {
 
             QGCButton {
                 _horizontalPadding: 0
-                text:               qsTr("Basic")
+                text:               qsTr("مربع")
                 visible:            !mapPolygon.traceMode
                 onClicked:          _resetPolygon()
             }
 
-            QGCButton {
-                _horizontalPadding: 0
-                text:               qsTr("Circular")
-                visible:            !mapPolygon.traceMode
-                onClicked:          _resetCircle()
-            }
+//            QGCButton {
+//                _horizontalPadding: 0
+//                text:               qsTr("Circular")
+//                visible:            !mapPolygon.traceMode
+//                onClicked:          _resetCircle()
+//            }
 
             QGCButton {
                 _horizontalPadding: 0
-                text:               mapPolygon.traceMode ? qsTr("Done Tracing") : qsTr("Trace")
+                text:               mapPolygon.traceMode ? qsTr("انجام ترسیم") : qsTr("شکل دلخواه")
                 onClicked: {
                     if (mapPolygon.traceMode) {
                         if (mapPolygon.count < 3) {
@@ -555,12 +555,12 @@ Item {
                 }
             }
 
-            QGCButton {
-                _horizontalPadding: 0
-                text:               qsTr("Load KML/SHP...")
-                onClicked:          kmlOrSHPLoadDialog.openForLoad()
-                visible:            !mapPolygon.traceMode
-            }
+//            QGCButton {
+//                _horizontalPadding: 0
+//                text:               qsTr("Load KML/SHP...")
+//                onClicked:          kmlOrSHPLoadDialog.openForLoad()
+//                visible:            !mapPolygon.traceMode
+//            }
         }
     }
 

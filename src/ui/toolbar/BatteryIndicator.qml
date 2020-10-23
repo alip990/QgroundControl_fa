@@ -53,7 +53,7 @@ Item {
                 return activeVehicle.battery.voltage.valueString + activeVehicle.battery.voltage.units
             }
         }
-        return "N/A"
+        return "باتری متصل نیست"
     }
 
     Component {
@@ -75,7 +75,7 @@ Item {
 
                 QGCLabel {
                     id:             battLabel
-                    text:           qsTr("Battery Status")
+                    text:           qsTr("وضعیت باتری")
                     font.family:    ScreenTools.demiboldFontFamily
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -86,11 +86,11 @@ Item {
                     columnSpacing:      ScreenTools.defaultFontPixelWidth
                     columns:            2
                     anchors.horizontalCenter: parent.horizontalCenter
-
-                    QGCLabel { text: qsTr("Voltage:") }
-                    QGCLabel { text: (activeVehicle && activeVehicle.battery.voltage.value !== -1) ? (activeVehicle.battery.voltage.valueString + " " + activeVehicle.battery.voltage.units) : "N/A" }
-                    QGCLabel { text: qsTr("Accumulated Consumption:") }
-                    QGCLabel { text: (activeVehicle && activeVehicle.battery.mahConsumed.value !== -1) ? (activeVehicle.battery.mahConsumed.valueString + " " + activeVehicle.battery.mahConsumed.units) : "N/A" }
+                    QGCLabel { text: (activeVehicle && activeVehicle.battery.voltage.value !== -1) ? (activeVehicle.battery.voltage.valueString + " " + activeVehicle.battery.voltage.units) : "باتری متصل نیست " }
+                    QGCLabel { text: qsTr("ولتاژ")
+                               anchors.right:parent.right }
+                    QGCLabel { text: (activeVehicle && activeVehicle.battery.mahConsumed.value !== -1) ? (activeVehicle.battery.mahConsumed.valueString + " " + activeVehicle.battery.mahConsumed.units) : "مشخص نیست" }
+                    QGCLabel { text: qsTr("مقدار درحال مصرف") }
                 }
             }
         }

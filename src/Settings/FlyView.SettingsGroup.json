@@ -43,7 +43,7 @@
 },
 {
     "name":             "keepMapCenteredOnVehicle",
-    "shortDescription": "Keep map centered on vehicle",
+    "shortDescription": "نشانگر پرنده را در مرکز نقشه قرار بدهید",
     "type":             "bool",
     "defaultValue":     false
 },

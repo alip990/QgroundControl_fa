@@ -46,7 +46,7 @@ Rectangle {
         anchors.top:            parent.bottom
         width:                  parent.height
         font.pointSize:         ScreenTools.smallFontPointSize
-        text:                   qsTr("Height AMSL (%1)").arg(
+        text:                   qsTr("(%1)AMSL ارتفاع").arg(
                                     QGroundControl.unitsConversion.appSettingsHorizontalDistanceUnitsString
                                 )
         horizontalAlignment:    Text.AlignHCenter

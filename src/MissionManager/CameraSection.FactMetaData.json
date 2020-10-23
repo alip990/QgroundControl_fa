@@ -7,13 +7,13 @@
     "name":             "CameraAction",
     "shortDescription": "Specify whether the camera should take photos or video",
     "type":             "uint32",
-    "enumStrings":      "No change,Take photo,Take photos (time),Take photos (distance),Stop taking photos,Start recording video,Stop recording video",
+    "enumStrings":      "بدون تغییر,عکسبرداری,عکس برداری بازمان,عکس برداری با فاصله,اتمام عکس برداری,شروع ضبط فیلم,اتمام ضبط فیلم",
     "enumValues":       "0,6,1,2,3,4,5",
     "defaultValue":     0
 },
 {
     "name":             "CameraPhotoIntervalDistance",
-    "shortDescription": "Specify the distance between each photo",
+    "shortDescription": "فاصله بین دو عکس را مشخص کنید",
     "type":             "double",
     "units":            "m",
     "min":              0.1,
@@ -22,9 +22,9 @@
 },
 {
     "name":             "CameraPhotoIntervalTime",
-    "shortDescription": "Specify the time between each photo",
+    "shortDescription": "زمان بین دو عکس را مشخص کنید",
     "type":             "uint32",
-    "units":            "secs",
+    "units":            "ثانیه",
     "min":              1,
     "decimalPlaces":    0,
     "defaultValue":     10
@@ -33,7 +33,7 @@
     "name":             "GimbalPitch",
     "shortDescription": "Gimbal pitch rotation.",
     "type":             "double",
-    "units":            "gimbal-degrees",
+    "units":            "درجه",
     "min":              -90,
     "max":              0,
     "increment":        5,
@@ -44,7 +44,7 @@
     "name":             "GimbalYaw",
     "shortDescription": "Gimbal yaw rotation.",
     "type":             "double",
-    "units":            "deg",
+    "units":            "درجه",
     "min":              -180.0,
     "max":              180.0,
     "increment":        5,
@@ -55,8 +55,8 @@
     "name":             "CameraMode",
     "shortDescription": "Specify whether the camera should switch to Photo, Video or Survey mode",
     "type":             "uint32",
-    "enumStrings":      "Photo,Video,Survey",
-    "enumValues":       "0,1,2",
+    "enumStrings":      "عکسبرداری,فیلم برداری",
+    "enumValues":       "0,1",
     "defaultValue":     0
 }
 ]

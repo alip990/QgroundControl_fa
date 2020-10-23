@@ -411,7 +411,7 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
 
         QmlObjectListModel* row = factValueGrid.appendRow();
         InstrumentValueData* value = row->value<InstrumentValueData*>(0);
-        value->setFact("Vehicle", "DistanceToHome");
+        value->setFact("Vehicle", "distanceToHome");
         value->setText(value->fact()->shortDescription());
         value->setShowUnits(true);
 

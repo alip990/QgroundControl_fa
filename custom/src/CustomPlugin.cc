@@ -113,11 +113,11 @@ QVariantList&
 CustomPlugin::settingsPages()
 {
     if(_customSettingsList.isEmpty()) {
-        _addSettingsEntry(tr("General"),     "qrc:/qml/GeneralSettings.qml",     "qrc:/res/gear-white.svg");
-        _addSettingsEntry(tr("Comm Links"),  "qrc:/qml/LinkSettings.qml",        "qrc:/res/waves.svg");
-        _addSettingsEntry(tr("Offline Maps"),"qrc:/qml/OfflineMap.qml",          "qrc:/res/waves.svg");
+        _addSettingsEntry(tr("عمومی"),     "qrc:/qml/GeneralSettings.qml",     "qrc:/res/gear-white.svg");
+        _addSettingsEntry(tr("ارتباطات"),  "qrc:/qml/LinkSettings.qml",        "qrc:/res/waves.svg");
+        _addSettingsEntry(tr("نقشه"),"qrc:/qml/OfflineMap.qml",          "qrc:/res/waves.svg");
         _addSettingsEntry(tr("MAVLink"),     "qrc:/qml/MavlinkSettings.qml",     "qrc:/res/waves.svg");
-        _addSettingsEntry(tr("Console"),     "qrc:/qml/QGroundControl/Controls/AppMessages.qml");
+        _addSettingsEntry(tr("ترمینال"),     "qrc:/qml/QGroundControl/Controls/AppMessages.qml");
 #if defined(QT_DEBUG)
         //-- These are always present on Debug builds
         _addSettingsEntry(tr("Mock Link"),   "qrc:/qml/MockLink.qml");
@@ -159,11 +159,11 @@ bool CustomPlugin::adjustSettingMetaData(const QString& settingsGroup, FactMetaD
     if (settingsGroup == AppSettings::settingsGroup) {
         // This tells QGC than when you are creating Plans while not connected to a vehicle
         // the specific firmware/vehicle the plan is for.
-        if (metaData.name() == AppSettings::offlineEditingFirmwareTypeName) {
-            metaData.setRawDefaultValue(MAV_AUTOPILOT_PX4);
+        if (metaData.name() == AppSettings::offlineEditingFirmwareClassName) {
+            metaData.setRawDefaultValue(QGCMAVLink::FirmwareClassPX4);
             return false;
-        } else if (metaData.name() == AppSettings::offlineEditingVehicleTypeName) {
-            metaData.setRawDefaultValue(MAV_TYPE_QUADROTOR);
+        } else if (metaData.name() == AppSettings::offlineEditingVehicleClassName) {
+            metaData.setRawDefaultValue(QGCMAVLink::VehicleClassMultiRotor);
             return false;
         }
     }

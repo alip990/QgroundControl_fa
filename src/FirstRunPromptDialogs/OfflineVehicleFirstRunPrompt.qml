@@ -18,9 +18,9 @@ import QGroundControl.SettingsManager   1.0
 import QGroundControl.Controls          1.0
 
 FirstRunPrompt {
-    title:      qsTr("Vehicle Information")
+    title:      qsTr("اطلاعات پرنده")
     promptId:   QGroundControl.corePlugin.offlineVehicleFirstRunPromptId
-
+    markAsShownOnClose: false
     property real   _margins:               ScreenTools.defaultFontPixelWidth
     property var    _appSettings:           QGroundControl.settingsManager.appSettings
     property var    _offlineVehicle:        QGroundControl.multiVehicleManager.offlineEditingVehicle
@@ -36,7 +36,7 @@ FirstRunPrompt {
         QGCLabel {
             id:                     unitsSectionLabel
             Layout.preferredWidth:  valueRect.width
-            text:                   qsTr("Specify information about the vehicle you plan to fly. If you are unsure of the correct values leave them as is.")
+            text:                   qsTr("اطلاعات پرنده خود را کامل کنید")
             wrapMode:               Text.WordWrap
         }
 
@@ -56,7 +56,7 @@ FirstRunPrompt {
 
                 QGCLabel {
                     Layout.fillWidth:   true
-                    text:               qsTr("Firmware")
+                    text:               qsTr("نرم افزار فلایت")
                     visible:            _multipleFirmware
                 }
                 FactComboBox {
@@ -68,7 +68,7 @@ FirstRunPrompt {
 
                 QGCLabel {
                     Layout.fillWidth:   true
-                    text:               qsTr("Vehicle")
+                    text:               qsTr("پرنده")
                     visible:            _multipleVehicleTypes
                 }
                 FactComboBox {
@@ -80,7 +80,7 @@ FirstRunPrompt {
 
                 QGCLabel {
                     Layout.fillWidth:   true
-                    text:               qsTr("Mission Cruise Speed")
+                    text:               qsTr("سرعت در عملیات")
                     visible:            _showCruiseSpeed
                 }
                 FactTextField {
@@ -91,7 +91,7 @@ FirstRunPrompt {
 
                 QGCLabel {
                     Layout.fillWidth:   true
-                    text:               qsTr("Mission Hover Speed")
+                    text:               qsTr("سرعت هاور")
                     visible:            _showHoverSpeed
                 }
                 FactTextField {

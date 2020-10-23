@@ -42,7 +42,7 @@ Item {
             _vehicleWasInMissionFlightMode = _vehicleInMissionFlightMode
         } else {
             if (_showMissionCompleteDialog) {
-                mainWindow.showComponentDialog(missionCompleteDialogComponent, qsTr("Flight Plan complete"), mainWindow.showDialogDefaultWidth, StandardButton.Close)
+                mainWindow.showComponentDialog(missionCompleteDialogComponent, qsTr("ماموریت تمام شد"), mainWindow.showDialogDefaultWidth, StandardButton.Close)
             }
             _vehicleWasArmed = false
             _vehicleWasInMissionFlightMode = false
@@ -85,7 +85,7 @@ Item {
 
                     QGCButton {
                         Layout.fillWidth:   true
-                        text:               qsTr("Remove plan from vehicle")
+                        text:               qsTr("ماموریت را از حافظه پاک کنید")
                         visible:            !_activeVehicle.connectionLost// && !_activeVehicle.apmFirmware  // ArduPilot has a bug somewhere with mission clear
                         onClicked: {
                             _planController.removeAllFromVehicle()
@@ -96,7 +96,7 @@ Item {
                     QGCButton {
                         Layout.fillWidth:   true
                         Layout.alignment:   Qt.AlignHCenter
-                        text:               qsTr("Leave plan on vehicle")
+                        text:               qsTr("ماموریت را روی حافظه باقی بگذارید")
                         onClicked:          hideDialog()
                     }
 
@@ -114,7 +114,7 @@ Item {
                         QGCButton {
                             Layout.fillWidth:   true
                             Layout.alignment:   Qt.AlignHCenter
-                            text:               qsTr("Resume Mission From Waypoint %1").arg(guidedController._resumeMissionIndex)
+                            text:               qsTr("ادامه بده %1 ماموریت را از نقطه مسیر").arg(guidedController._resumeMissionIndex)
 
                             onClicked: {
                                 guidedController.executeAction(guidedController.actionResumeMission, null, null)
@@ -125,7 +125,7 @@ Item {
                         QGCLabel {
                             Layout.fillWidth:   true
                             wrapMode:           Text.WordWrap
-                            text:               qsTr("Resume Mission will rebuild the current mission from the last flown waypoint and upload it to the vehicle for the next flight.")
+                            text:               qsTr("ادامه ماموریت ،ماموریت فعلی را برای پرواز بعدی در پرنده ذخیره میکند")
                         }
                     }
 
@@ -133,7 +133,7 @@ Item {
                         Layout.fillWidth:   true
                         wrapMode:           Text.WordWrap
                         color:              qgcPal.warningText
-                        text:               qsTr("If you are changing batteries for Resume Mission do not disconnect from the vehicle.")
+                        text:               qsTr("اگر در حال تغییر باتری برای دامه ماموریت هستید ، ارتباط خود را با پرنده قطع نکنید.")
                         visible:            guidedController.showResumeMission
                     }
                 }

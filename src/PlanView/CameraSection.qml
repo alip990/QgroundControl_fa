@@ -26,7 +26,7 @@ Column {
         id:             cameraSectionHeader
         anchors.left:   parent.left
         anchors.right:  parent.right
-        text:           qsTr("Camera")
+        text:           qsTr("دوربین")
         checked:        false
     }
 
@@ -51,7 +51,7 @@ Column {
             visible:        _camera.cameraAction.rawValue === 1
 
             QGCLabel {
-                text:               qsTr("Time")
+                text:               qsTr("زمان")
                 Layout.fillWidth:   true
             }
             FactTextField {
@@ -67,7 +67,7 @@ Column {
             visible:        _camera.cameraAction.rawValue === 2
 
             QGCLabel {
-                text:               qsTr("Distance")
+                text:               qsTr("فاصله")
                 Layout.fillWidth:   true
             }
             FactTextField {
@@ -84,7 +84,7 @@ Column {
 
             QGCCheckBox {
                 id:                 modeCheckBox
-                text:               qsTr("Mode")
+                text:               qsTr("حالت")
                 checked:            _camera.specifyCameraMode
                 onClicked:          _camera.specifyCameraMode = checked
             }
@@ -103,7 +103,7 @@ Column {
             rowSpacing:     0
             columns:        3
 
-            QGCLabel { text: qsTr("Gimbal") }
+            QGCLabel { text: qsTr("گیمبال") }
             QGCLabel { text: qsTr("Pitch") }
             QGCLabel { text: qsTr("Yaw") }
 

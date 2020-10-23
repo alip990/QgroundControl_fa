@@ -3810,12 +3810,12 @@ Blue Robotics的设备设计使用水来润滑，并非可以空转。但是可�
     <message>
       <location filename="../src/ui/toolbar/ArmedIndicator.qml" line="26"/>
       <source>Armed</source>
-      <translation>已解锁</translation>
+      <translation>ارم</translation>
     </message>
     <message>
       <location filename="../src/ui/toolbar/ArmedIndicator.qml" line="26"/>
       <source>Disarmed</source>
-      <translation>未解锁</translation>
+      <translation>دیسارم</translation>
     </message>
   </context>
   <context>
@@ -7036,7 +7036,7 @@ Blue Robotics的设备设计使用水来润滑，并非可以空转。但是可�
     <message>
       <location filename="../src/FlightDisplay/GuidedActionsController.qml" line="43"/>
       <source>Start Mission (MV)</source>
-      <translation>开始任务 (MV)</translation>
+      <translation>شروع ماموزیت</translation>
     </message>
     <message>
       <location filename="../src/FlightDisplay/GuidedActionsController.qml" line="44"/>
@@ -9062,12 +9062,12 @@ Click the Next button to upload calibration to board. Click Cancel if you don&ap
     <message>
       <location filename="../src/FlightDisplay/MultiVehicleList.qml" line="131"/>
       <source>Armed</source>
-      <translation>已解锁</translation>
+      <translation>ارم</translation>
     </message>
     <message>
       <location filename="../src/FlightDisplay/MultiVehicleList.qml" line="131"/>
       <source>Disarmed</source>
-      <translation>未解锁</translation>
+      <translation>دیس ارم</translation>
     </message>
   </context>
   <context>
@@ -9773,7 +9773,7 @@ Is this really what you want?</source>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="45"/>
       <source>Offboard</source>
-      <translation>板外Offboard</translation>
+      <translation>افبرد</translation>
     </message>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="46"/>
@@ -9783,12 +9783,12 @@ Is this really what you want?</source>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="47"/>
       <source>Takeoff</source>
-      <translation>起飞</translation>
+      <translation>تیک اف</translation>
     </message>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="48"/>
       <source>Hold</source>
-      <translation>保持Hold</translation>
+      <translation>هولد</translation>
     </message>
     <message>
       <location filename="../src/FirmwarePlugin/PX4/PX4FirmwarePlugin.cc" line="49"/>

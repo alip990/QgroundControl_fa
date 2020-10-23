@@ -32,7 +32,7 @@
 #include "QGCCorePlugin.h"
 #include "TakeoffMissionItem.h"
 #include "PlanViewSettings.h"
-
+#include <typeinfo>
 #define UPDATE_TIMEOUT 5000 ///< How often we check for bounding box changes
 
 QGC_LOGGING_CATEGORY(MissionControllerLog, "MissionControllerLog")
@@ -226,7 +226,8 @@ void MissionController::loadFromVehicle(void)
 }
 
 void MissionController::sendToVehicle(void)
-{
+{    qInfo()<<"+++++++++++++++++++++++++++++++++++++++++++++++ +++++++++++++++++ ";
+
     if (_masterController->offline()) {
         qCWarning(MissionControllerLog) << "MissionControllerLog::sendToVehicle called while offline";
     } else if (syncInProgress()) {
@@ -239,14 +240,94 @@ void MissionController::sendToVehicle(void)
             sendItemsToVehicle(_managerVehicle, &emptyModel);
         } else {
             sendItemsToVehicle(_managerVehicle, _visualItems);
+
         }
         setDirty(false);
     }
 }
+void MissionController::sendToVehicle_multiAgent(MultiVehicleManager*    _multiVehicleMgr,qint8 number_of_vehicle_to_send_mission)
+{
+//    if (_masterController->offline()) {
+//        qCWarning(MissionControllerLog) << "MissionControllerLog::sendToVehicle called while offline";
+//    } else if (syncInProgress()) {
+//        qCWarning(MissionControllerLog) << "MissionControllerLog::sendToVehicle called while syncInProgress";
+//    } else {
+//        qCDebug(MissionControllerLog) << "MissionControllerLog::sendToVehicle";
+//        if (_visualItems->count() == 1) {
+//            // This prevents us from sending a possibly bogus home position to the vehicle
+//            QmlObjectListModel emptyModel;
+//            sendItemsToVehicle(_managerVehicle, &emptyModel);
+//        } else {
+//            sendItemsToVehicle(_managerVehicle, _visualItems);
+
+//        }
+//        setDirty(false);
+//    }
+    qInfo()<<"+++++++++++++++++++++++++++++++++++++++++++++++ +++++++++++++++++ ";
+    qInfo()<<"number_of_vehicle_to_send_mission "<<number_of_vehicle_to_send_mission;
+    //Vehicle*  current_active_vehicle = this->_managerVehicle;
+
+//    const qint8 MaxSearcherVehicle=10;// number_of_vehicle_to_send_mission should be less than max vehicle
+//    QmlObjectListModel emptyModel;
+//    QmlObjectListModel visualItem_divided_list[MaxSearcherVehicle];
+//    for (int i=0;i<number_of_vehicle_to_send_mission;i++){
+//        int index_visualItem =0;
+//        int visualItem_number=_visualItems->count()/number_of_vehicle_to_send_mission;
+//        int last_vehicle_visual_item_numner=(_visualItems->count()%number_of_vehicle_to_send_mission)+visualItem_number
+//        visualItem_divided_list[i]=new QmlObjectListModel();
+//        for (int j=0;j<)
+//    }
+
+    QList<MissionItem*> complex_items;
+    QList<MissionItem*> final_missionItem;
+
+    bool endActionSet = false;
+    int lastSeqNum =0;
+    Vehicle* vehicle = qobject_cast<Vehicle*>(_multiVehicleMgr->vehicles()->get(2));
+    //disconnect(_masterController, &PlanMasterController::managerVehicleChanged, this, &MissionController::_managerVehicleChanged);
+
+    _multiVehicleMgr->setActiveVehicle(vehicle);
+    //_managerVehicle=vehicle;
+    //connect(_masterController, &PlanMasterController::managerVehicleChanged, this, &MissionController::_managerVehicleChanged);
+
+    //emit _multiVehicleMgr->activeVehicleChanged(vehicle);
+    //qInfo<< " now active vehicle is "<< _multiVehicleMgr->activeVehicle()->id();
+    for(int i=0;i<_visualItems->count();i++){
+       VisualMissionItem* visualItem = qobject_cast<VisualMissionItem*>(_visualItems->get(i));
+       lastSeqNum = visualItem->lastSequenceNumber();
+       if (i==0 || i==1){ //these are mission and take off waypoints that shoud be the same for the vehicles
+           visualItem->appendMissionItems(final_missionItem,vehicle);
+       }
+//       else if (_visualItems->value<SurveyComplexItem*>(i)){
+//           qInfo()<< "the number of visual is "<<i;
+//           visualItem->appendMissionItems(complex_items,vehicle);
+//           qInfo()<<"number of waypoint is "<<complex_items.count();
+//           final_missionItem+=complex_items;
+//       }
+       else{
+           visualItem->appendMissionItems(final_missionItem,vehicle);
+       }
+//TODO we shoud append all kind of mission item here
+   }
+    MissionSettingsItem* settingsItem = _visualItems->value<MissionSettingsItem*>(0);
+    if (settingsItem) {
+           endActionSet = settingsItem->addMissionEndAction(final_missionItem, lastSeqNum + 1, vehicle);
+           qInfo()<<"endActionSet is "<<endActionSet;
+     }
+    //vehicle->missionManager()->writeMissionItems(final_missionItem);
+    //removeAllFromVehicle();
+
+    //PlanMasterController::_activeVehicleChanged(Vehicle* activeVehicle)
+    //_convertToMissionItems(_visualItems, final_missionItem, vehicle);
+    vehicle->missionManager()->writeMissionItems(final_missionItem);
+
+
+}
+
 
 /// Converts from visual items to MissionItems
 ///     @param missionItemParent QObject parent for newly allocated MissionItems
-/// @return true: Mission end action was added to end of list
+///     @return true: Mission end action was added to end of list
 bool MissionController::_convertToMissionItems(QmlObjectListModel* visualMissionItems, QList<MissionItem*>& rgMissionItems, QObject* missionItemParent)
 {
     if (visualMissionItems->count() == 0) {
@@ -358,7 +439,7 @@ VisualMissionItem* MissionController::insertSimpleMissionItem(QGeoCoordinate coo
     return _insertSimpleMissionItemWorker(coordinate, MAV_CMD_NAV_WAYPOINT, visualItemIndex, makeCurrentItem);
 }
 
-VisualMissionItem* MissionController::insertTakeoffItem(QGeoCoordinate /*coordinate*/, int visualItemIndex, bool makeCurrentItem)
+VisualMissionItem* MissionController::insertTakeoffItem(QGeoCoordinate coordinate, int visualItemIndex, bool makeCurrentItem)
 {
     int sequenceNumber = _nextSequenceNumber();
     TakeoffMissionItem * newItem = new TakeoffMissionItem(_controllerVehicle->vtol() ? MAV_CMD_NAV_VTOL_TAKEOFF : MAV_CMD_NAV_TAKEOFF, _masterController, _flyView, _settingsItem, this);
@@ -2199,10 +2280,10 @@ QStringList MissionController::complexMissionItemNames(void) const
     QStringList complexItems;
 
     complexItems.append(SurveyComplexItem::name);
-    complexItems.append(CorridorScanComplexItem::name);
-    if (_controllerVehicle->multiRotor() || _controllerVehicle->vtol()) {
-        complexItems.append(StructureScanComplexItem::name);
-    }
+//    complexItems.append(CorridorScanComplexItem::name);
+//    if (_controllerVehicle->multiRotor() || _controllerVehicle->vtol()) {
+//        complexItems.append(StructureScanComplexItem::name);
+//    }
 
     // Note: The landing pattern items are not added here since they have there own button which adds them
 

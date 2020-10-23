@@ -14,7 +14,9 @@ import QGroundControl               1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Controls      1.0
 import QGroundControl.Palette       1.0
-
+import QtQuick.Controls 2.3
+//-------------------------------------------------------------------------
+//-- Armed Indicator
 /// Guided actions confirmation dialog
 Rectangle {
     id:             _root
@@ -110,12 +112,36 @@ Rectangle {
         }
 
         // Action confirmation control
-        SliderSwitch {
-            id:             slider
-            confirmText:    qsTr("Slide to confirm")
-            width:          Math.max(implicitWidth, ScreenTools.defaultFontPixelWidth * 30)
+//        SliderSwitch {
+//            id:             slider
+//            confirmText:    qsTr("برای تایید به کنار بکشید")
+//            width:          Math.max(implicitWidth, ScreenTools.defaultFontPixelWidth * 30)
 
-            onAccept: {
+//            onAccept: {
+//                _root.visible = false
+//                var altitudeChange = 0
+//                if (altitudeSlider.visible) {
+//                    altitudeChange = altitudeSlider.getAltitudeChangeValue()
+//                    altitudeSlider.visible = false
+//                }
+//                hideTrigger = false
+//                guidedController.executeAction(_root.action, _root.actionData, altitudeChange, _root.optionChecked)
+//                if (mapIndicator) {
+//                    mapIndicator.actionConfirmed()
+//                    mapIndicator = undefined
+//                }
+//            }
+//        }
+        RoundButton {
+
+
+            id:             slider
+            text:    qsTr("برای تایید کلیک کنید")
+            width:          Math.max(implicitWidth, ScreenTools.defaultFontPixelWidth * 30)
+            palette {
+                    button: "#238a6b"
+                }
+            onClicked: {
                 _root.visible = false
                 var altitudeChange = 0
                 if (altitudeSlider.visible) {
@@ -129,6 +155,7 @@ Rectangle {
                     mapIndicator = undefined
                 }
             }
+
         }
     }
 

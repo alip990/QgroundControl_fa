@@ -8,7 +8,7 @@
             "comment":              "MAV_CMD_NAV_LAST: Used for mission settings / planned home position waypoint",
             "id":                   95,
             "rawName":              "HomeRaw",
-            "friendlyName":         "Home Position",
+            "friendlyName":         "نقطه خانه",
             "description":          "Planned home position for mission.",
             "specifiesCoordinate":  true,
             "friendlyEdit":         true,
@@ -27,25 +27,25 @@
         {
             "id":                   16,
             "rawName":              "MAV_CMD_NAV_WAYPOINT",
-            "friendlyName":         "Waypoint",
-            "description":          "Travel to a position in 3D space.",
+            "friendlyName":         "نقطه مسیر",
+            "description":          "نقطه مسیر سه بعدی",
             "specifiesCoordinate":  true,
             "friendlyEdit":         true,
             "category":             "Basic",
             "param1": {
-                "label":            "Hold",
-                "units":            "secs",
+                "label":            "زمان توقف",
+                "units":            "ثانیه",
                 "default":          0,
                 "decimalPlaces":    0
             },
             "param2": {
-                "label":            "Acceptance",
+                "label":            "شعاع",
                 "units":            "m",
                 "default":          0,
                 "decimalPlaces":    2
             },
             "param3": {
-                "label":            "Pass Radius",
+                "label":            "شعاع عبور",
                 "units":            "m",
                 "default":          0,
                 "decimalPlaces":    2
@@ -152,16 +152,16 @@
         {
             "id":           20,
             "rawName":      "MAV_CMD_NAV_RETURN_TO_LAUNCH",
-            "friendlyName": "Return To Launch",
-            "description":  "Send the vehicle back to the launch position.",
+            "friendlyName": "برگشت به نقطه شروع",
+            "description":  "پرنده را به نقطه شروع برگردانید",
             "friendlyEdit": true,
             "category":     "Basic"
         },
         {
             "id":                   21,
             "rawName":              "MAV_CMD_NAV_LAND",
-            "friendlyName":         "Land",
-            "description":          "Land vehicle at the specified location.",
+            "friendlyName":         "فرود",
+            "description":          "پرنده در نقطه مشخص شده فرود بیاورید",
             "specifiesCoordinate":  true,
             "isLandCommand":        true,
             "friendlyEdit":         true,
@@ -173,7 +173,7 @@
                 "decimalPlaces":    2
             },
             "param2": {
-                "label":            "Precision Land",
+                "label":            "دقت فرود",
                 "units":            "m",
                 "enumStrings":      "Disabled,Opportunistic,Required",
                 "enumValues":       "0,1,2",
@@ -191,8 +191,8 @@
         {
             "id":                   22,
             "rawName":              "MAV_CMD_NAV_TAKEOFF",
-            "friendlyName":         "Takeoff",
-            "description":          "Launch from the ground and travel towards the specified takeoff position.",
+            "friendlyName":         "برخاستن",
+            "description":          "از زمین بلند شده  و به سمت موقعیت مشخص حرکت کنید.",
             "specifiesCoordinate":  true,
             "isTakeoffCommand":     true,
             "friendlyEdit":         true,
@@ -217,7 +217,7 @@
         {
             "id":                       30,
             "rawName":                  "MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT",
-            "friendlyName":             "Change Altitude",
+            "friendlyName":             "تغییر ارتفاع",
             "description":              "Continue on the current course and climb/descend to specified altitude. When the altitude is reached continue to the next command.",
             "specifiesCoordinate":      false,
             "specifiesAltitudeOnly":    true,

@@ -26,11 +26,11 @@ QGCViewDialog {
 
     QGCPalette { id: qgcPal }
 
-    QGCLabel {
-        id:                 categoryLabel
-        anchors.baseline:   categoryCombo.baseline
-        text:               qsTr("Category:")
-    }
+//    QGCLabel {
+//        id:                 categoryLabel
+//        anchors.baseline:   categoryCombo.baseline
+//        text:               qsTr("Category:")
+//    }
 
     QGCComboBox {
         id:                 categoryCombo
@@ -38,9 +38,14 @@ QGCViewDialog {
         anchors.left:       categoryLabel.right
         anchors.right:      parent.right
         model:              QGroundControl.missionCommandTree.categoriesForVehicle(vehicle)
-
+        visible: false
         function categorySelected(category) {
-            commandList.model = QGroundControl.missionCommandTree.getCommandsForCategory(vehicle, category, flyThroughCommandsAllowed)
+            var _
+
+           _ = QGroundControl.missionCommandTree.getCommandsForCategory(vehicle, category, flyThroughCommandsAllowed)
+            _.pop();
+            _.pop();
+            commandList.model=_;
         }
 
         Component.onCompleted: {
@@ -62,7 +67,6 @@ QGCViewDialog {
         spacing:            ScreenTools.defaultFontPixelHeight / 2
         orientation:        ListView.Vertical
         clip:               true
-
         delegate: Rectangle {
             width:  parent.width
             height: commandColumn.height + ScreenTools.defaultFontPixelHeight

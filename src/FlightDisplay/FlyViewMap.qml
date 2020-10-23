@@ -226,7 +226,9 @@ FlightMap {
     MapPolyline {
         id:         trajectoryPolyline
         line.width: 3
-        line.color: "red"
+        //line.color: "red"
+
+        line.color: "blue"
         z:          QGroundControl.zOrderTrajectoryLines
         visible:    !pipMode
 
@@ -351,7 +353,7 @@ FlightMap {
         sourceItem: MissionItemIndexLabel {
             checked:    true
             index:      -1
-            label:      qsTr("Go here", "Go to location waypoint")
+            label:      qsTr("به این مکان برو ", "به این موقعیت برو")
         }
 
         property bool inGotoFlightMode: activeVehicle ? activeVehicle.flightMode === activeVehicle.gotoFlightMode : false
@@ -454,7 +456,7 @@ FlightMap {
         sourceItem: MissionItemIndexLabel {
             checked:    true
             index:      -1
-            label:      qsTr("ROI here", "Make this a Region Of Interest")
+            label:      qsTr("این نقطه را زیر نظر بگیر", "این نقطه را زیر نظر بگیر")
         }
 
         //-- Visibilty controlled by actual state
@@ -490,7 +492,7 @@ FlightMap {
         sourceItem: MissionItemIndexLabel {
             checked:    true
             index:      -1
-            label:      qsTr("Orbit", "Orbit waypoint")
+            label:      qsTr("چرخش", "دور زدن در این مدار")
         }
     }
 
@@ -502,7 +504,7 @@ FlightMap {
             id: clickMenu
             property var coord
             QGCMenuItem {
-                text:           qsTr("Go to location")
+                text:           qsTr("به این نقطه برو ")
                 visible:        guidedActionsController.showGotoLocation
 
                 onTriggered: {
@@ -511,7 +513,7 @@ FlightMap {
                 }
             }
             QGCMenuItem {
-                text:           qsTr("Orbit at location")
+                text:           qsTr("چرخش حول این نقطه")
                 visible:        guidedActionsController.showOrbit
 
                 onTriggered: {
@@ -520,7 +522,7 @@ FlightMap {
                 }
             }
             QGCMenuItem {
-                text:           qsTr("ROI at location")
+                text:           qsTr("این نقطه را زیر نظر بگیر")
                 visible:        guidedActionsController.showROI
 
                 onTriggered: {

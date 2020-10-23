@@ -20,7 +20,7 @@ CustomFirmwarePlugin::CustomFirmwarePlugin()
     for (int i = 0; i < _flightModeInfoList.count(); i++) {
         FlightModeInfo_t& info = _flightModeInfoList[i];
         //-- Narrow the flight mode options to only these
-        if (info.name != _holdFlightMode && info.name != _rtlFlightMode && info.name != _missionFlightMode) {
+        if (info.name != _holdFlightMode && info.name != _rtlFlightMode && info.name != _missionFlightMode &&info.name != _manualFlightMode) {
             // No other flight modes can be set
             info.canBeSet = false;
         }
@@ -41,8 +41,18 @@ const QVariantList& CustomFirmwarePlugin::toolIndicators(const Vehicle* vehicle)
         _toolIndicatorList = FirmwarePlugin::toolIndicators(vehicle);
         // Then specifically remove the RC RSSI indicator.
         _toolIndicatorList.removeOne(QVariant::fromValue(QUrl::fromUserInput("qrc:/toolbar/RCRSSIIndicator.qml")));
+        _toolIndicatorList.removeOne(QVariant::fromValue(QUrl::fromUserInput("qrc:/toolbar/GPSIndicator.qml")));
     }
     return _toolIndicatorList;
+}
+
+const QVariantList &CustomFirmwarePlugin::modeIndicators(const Vehicle *vehicle)
+{
+    if(_modeIndicatorList.size()==0){
+        _modeIndicatorList = FirmwarePlugin::modeIndicators(vehicle);
+        _modeIndicatorList.removeOne(QVariant::fromValue(QUrl::fromUserInput("qrc:/toolbar/ROIIndicator.qml")));
+    }
+    return _modeIndicatorList;
 }
 
 // Tells QGC that your vehicle has a gimbal on it. This will in turn cause thing like gimbal commands to point
@@ -50,8 +60,8 @@ const QVariantList& CustomFirmwarePlugin::toolIndicators(const Vehicle* vehicle)
 bool CustomFirmwarePlugin::hasGimbal(Vehicle* /*vehicle*/, bool& rollSupported, bool& pitchSupported, bool& yawSupported)
 {
     rollSupported = false;
-    pitchSupported = true;
-    yawSupported = true;
+    pitchSupported = false;
+    yawSupported = false;
 
     return true;
 }

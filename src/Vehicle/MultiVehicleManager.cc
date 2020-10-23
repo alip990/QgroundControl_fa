@@ -136,7 +136,7 @@ void MultiVehicleManager::_vehicleHeartbeatInfo(LinkInterface* link, int vehicle
     emit vehicleAdded(vehicle);
 
     if (_vehicles.count() > 1) {
-        qgcApp()->showAppMessage(tr("Connected to Vehicle %1").arg(vehicleId));
+        qgcApp()->showAppMessage(tr("پرنده %1 متصل شد").arg(vehicleId));
     } else {
         setActiveVehicle(vehicle);
     }
@@ -253,8 +253,8 @@ void MultiVehicleManager::_deleteVehiclePhase2(void)
 
 void MultiVehicleManager::setActiveVehicle(Vehicle* vehicle)
 {
-    qCDebug(MultiVehicleManagerLog) << "setActiveVehicle" << vehicle;
-
+    //qCDebug(MultiVehicleManagerLog) << "setActiveVehicle" << vehicle;
+    qInfo()<< "setActiveVehicle in multivehiclemanger" << vehicle->id();
     if (vehicle != _activeVehicle) {
         if (_activeVehicle) {
             _activeVehicle->setActive(false);

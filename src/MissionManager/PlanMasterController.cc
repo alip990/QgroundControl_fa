@@ -117,11 +117,12 @@ void PlanMasterController::startStaticActiveVehicle(Vehicle* vehicle, bool delet
 }
 
 void PlanMasterController::_activeVehicleChanged(Vehicle* activeVehicle)
-{
-    if (_managerVehicle == activeVehicle) {
+{     if (_managerVehicle == activeVehicle) {
         // We are already setup for this vehicle
         return;
     }
+    if (activeVehicle != 0x0)
+        qInfo() <<"_activeVehiclechanged in 120 planmastercontroller.cc " << activeVehicle->id();
 
     qCDebug(PlanMasterControllerLog) << "_activeVehicleChanged" << activeVehicle;
 
@@ -299,7 +300,7 @@ void PlanMasterController::_startFlightPlanning(void) {
 void PlanMasterController::sendToVehicle(void)
 {
     if (_managerVehicle->highLatencyLink()) {
-        qgcApp()->showAppMessage(tr("Upload not supported on high latency links."));
+        qgcApp()->showAppMessage(tr("بارگذاری به دلیل ارتباط با تاخیر بالا امکان پذیر نیست"));
         return;
     }
 
@@ -311,6 +312,24 @@ void PlanMasterController::sendToVehicle(void)
         qCDebug(PlanMasterControllerLog) << "PlanMasterController::sendToVehicle start mission sendToVehicle";
         _sendGeoFence = true;
         _missionController.sendToVehicle();
+        setDirty(false);
+    }
+}
+void PlanMasterController::sendToVehicle_multiAgent(qint8 numner_of_agent)
+{   qInfo()<<"we are in planmastercontroller in line 300 علیرضا" ;
+    if (_managerVehicle->highLatencyLink()) {
+        qgcApp()->showAppMessage(tr("بارگذاری به دلیل ارتباط با تاخیر بالا امکان پذیر نیست"));
+        return;
+    }
+
+    if (offline()) {
+        qCWarning(PlanMasterControllerLog) << "PlanMasterController::sendToVehicle called while offline";
+    } else if (syncInProgress()) {
+        qCWarning(PlanMasterControllerLog) << "PlanMasterController::sendToVehicle called while syncInProgress";
+    } else {
+        qCDebug(PlanMasterControllerLog) << "PlanMasterController::sendToVehicle start mission sendToVehicle";
+        _sendGeoFence = true;
+        _missionController.sendToVehicle_multiAgent(_multiVehicleMgr,numner_of_agent);
         setDirty(false);
     }
 }

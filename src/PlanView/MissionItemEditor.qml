@@ -152,7 +152,7 @@ Rectangle {
 
             QGCMouseArea {
                 fillItem:   parent
-                onClicked:  mainWindow.showComponentDialog(commandDialog, qsTr("Select Mission Command"), mainWindow.showDialogDefaultWidth, StandardButton.Cancel)
+                onClicked:  mainWindow.showComponentDialog(commandDialog, qsTr("انتخاب نوع نقطه مسیر "), mainWindow.showDialogDefaultWidth, StandardButton.Cancel)
             }
 
             Component {
@@ -203,7 +203,7 @@ Rectangle {
                 id: hamburgerMenu
 
                 QGCMenuItem {
-                    text:           qsTr("Move to vehicle position")
+                    text:           qsTr("انتقال به موقعیت فعلی پرنده")
                     visible:        missionItem.specifiesCoordinate
                     enabled:        _activeVehicle
                     onTriggered:    missionItem.coordinate = _activeVehicle.coordinate
@@ -212,43 +212,43 @@ Rectangle {
                 }
 
                 QGCMenuItem {
-                    text:           qsTr("Move to previous item position")
+                    text:           qsTr("انتقال به مکان نقطه مسیر قبلی")
                     visible:        _missionController.previousCoordinate.isValid
                     onTriggered:    missionItem.coordinate = _missionController.previousCoordinate
                 }
 
                 QGCMenuItem {
-                    text:           qsTr("Edit position...")
+                    text:           qsTr("تغییر مکان نقطه مسیر")
                     visible:        missionItem.specifiesCoordinate
-                    onTriggered:    mainWindow.showComponentDialog(editPositionDialog, qsTr("Edit Position"), mainWindow.showDialogDefaultWidth, StandardButton.Close)
+                    onTriggered:    mainWindow.showComponentDialog(editPositionDialog, qsTr("تغییر مکان "), mainWindow.showDialogDefaultWidth, StandardButton.Close)
                 }
 
                 QGCMenuSeparator {
                     visible: missionItem.isSimpleItem && !_waypointsOnlyMode
                 }
 
-                QGCMenuItem {
-                    text:       qsTr("Show all values")
-                    checkable:  true
-                    checked:    missionItem.isSimpleItem ? missionItem.rawEdit : false
-                    visible:    missionItem.isSimpleItem && !_waypointsOnlyMode
+//                QGCMenuItem {
+//                    text:       qsTr("نمایش تمام مقادیر")
+//                    checkable:  true
+//                    checked:    missionItem.isSimpleItem ? missionItem.rawEdit : false
+//                    visible:    missionItem.isSimpleItem && !_waypointsOnlyMode
 
-                    onTriggered:    {
-                        if (missionItem.rawEdit) {
-                            if (missionItem.friendlyEditAllowed) {
-                                missionItem.rawEdit = false
-                            } else {
-                                mainWindow.showMessageDialog(qsTr("Mission Edit"), qsTr("You have made changes to the mission item which cannot be shown in Simple Mode"))
-                            }
-                        } else {
-                            missionItem.rawEdit = true
-                        }
-                        checked = missionItem.rawEdit
-                    }
-                }
+//                    onTriggered:    {
+//                        if (missionItem.rawEdit) {
+//                            if (missionItem.friendlyEditAllowed) {
+//                                missionItem.rawEdit = false
+//                            } else {
+//                                mainWindow.showMessageDialog(qsTr("تغییر ماموریت"), qsTr("You have made changes to the mission item which cannot be shown in Simple Mode"))
+//                            }
+//                        } else {
+//                            missionItem.rawEdit = true
+//                        }
+//                        checked = missionItem.rawEdit
+//                    }
+//                }
 
                 QGCMenuItem {
-                    text:       qsTr("Item #%1").arg(missionItem.sequenceNumber)
+                    text:       qsTr(" #%1 نقطه مسیر ").arg(missionItem.sequenceNumber)
                     enabled:    false
                 }
             }

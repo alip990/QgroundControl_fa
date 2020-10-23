@@ -25,10 +25,10 @@ Rectangle {
     property bool _globalAltModeIsMixed:    _globalAltMode == QGroundControl.AltitudeModeNone
     property real _radius:                  ScreenTools.defaultFontPixelWidth / 2
 
-    property string _altModeRelativeHelpText:       qsTr("Altitude relative to launch altitude")
-    property string _altModeAbsoluteHelpText:       qsTr("Altitude above mean sea level")
-    property string _altModeAboveTerrainHelpText:   qsTr("Altitude above terrain\nActual AMSL altitude: %1 %2").arg(missionItem.amslAltAboveTerrain.valueString).arg(missionItem.amslAltAboveTerrain.units)
-    property string _altModeTerrainFrameHelpText:   qsTr("Using terrain reference frame")
+    property string _altModeRelativeHelpText:       qsTr("ارتفاع نسبت به نقطه شروع")
+    property string _altModeAbsoluteHelpText:       qsTr("ارتفاع نسبت به سطح دریا")
+    property string _altModeAboveTerrainHelpText:   qsTr("ارتفاع بالاتر از سطح زمین \ n ارتفاع واقعی AMSL: %1 %2").arg(missionItem.amslAltAboveTerrain.valueString).arg(missionItem.amslAltAboveTerrain.units)
+    property string _altModeTerrainFrameHelpText:   qsTr("با استفاده از قاب مرجع زمین")
 
     function updateAltitudeModeText() {
         if (missionItem.altitudeMode === QGroundControl.AltitudeModeRelative) {
@@ -44,7 +44,7 @@ Rectangle {
             altModeLabel.text = QGroundControl.altitudeModeShortDescription(QGroundControl.AltitudeModeTerrainFrame)
             altModeHelp.text = _altModeTerrainFrameHelpText
         } else {
-            altModeLabel.text = qsTr("Internal Error")
+            altModeLabel.text = qsTr("ارور داخلی")
             altModeHelp.text = ""
         }
     }
@@ -71,7 +71,7 @@ Rectangle {
             wrapMode:       Text.WordWrap
             font.pointSize: ScreenTools.smallFontPointSize
             text:           missionItem.rawEdit ?
-                                qsTr("Provides advanced access to all commands/parameters. Be very careful!") :
+                                qsTr("دسترسی پیشرفته به همه دستورات / پارامترها را فراهم می کند. خیلی مراقب باشید") :
                                 missionItem.commandDescription
         }
 
@@ -89,14 +89,14 @@ Rectangle {
             }
 
             QGCLabel {
-                text:               qsTr("Ensure clear of obstacles and into the wind.")
+                text:               qsTr("اطمینان حاصل کنید که از موانع پاک شده و در معرض باد قرار دارید.")
                 Layout.fillWidth:   true
                 wrapMode:           Text.WordWrap
                 visible:            !initialClickLabel.visible
             }
 
             QGCButton {
-                text:               qsTr("Done")
+                text:               qsTr("انجام شد")
                 Layout.fillWidth:   true
                 visible:            !initialClickLabel.visible
                 onClicked: {
@@ -109,8 +109,8 @@ Rectangle {
             QGCLabel {
                 id:                 initialClickLabel
                 text:               missionItem.launchTakeoffAtSameLocation ?
-                                        qsTr("Click in map to set planned Takeoff location.") :
-                                        qsTr("Click in map to set planned Launch location.")
+                                        qsTr("برای مشخص کردن نقطه برخاستن روی نقشه کلیک کنید") :
+                                        qsTr("برای مشخص کردن نقطه شروع روی نقشه کلیک کنید")
                 Layout.fillWidth:   true
                 wrapMode:           Text.WordWrap
                 visible:            missionItem.isTakeoffItem && !missionItem.launchCoordinate.isValid
@@ -143,7 +143,7 @@ Rectangle {
                         Layout.fillWidth:   true
                         wrapMode:           Text.WordWrap
                         font.pointSize:     ScreenTools.smallFontPointSize
-                        text:               qsTr("Altitude below specifies the approximate altitude of the ground. Normally 0 for landing back at original launch location.")
+                        text:               qsTr("ارتفاع زمین برای فرود را مشخص میکند ")
                         visible:            missionItem.isLandCommand
                     }
 
@@ -208,7 +208,7 @@ Rectangle {
                     }
 
                     QGCLabel {
-                        text:           qsTr("Altitude")
+                        text:           qsTr("ارتفاع")
                         font.pointSize: ScreenTools.smallFontPointSize
                         visible:        !_globalAltModeIsMixed
                     }
@@ -285,7 +285,7 @@ Rectangle {
 
                 QGCCheckBox {
                     id:         flightSpeedCheckbox
-                    text:       qsTr("Flight Speed")
+                    text:       qsTr("سرعت پرواز")
                     checked:    missionItem.speedSection.specifyFlightSpeed
                     onClicked:  missionItem.speedSection.specifyFlightSpeed = checked
                     visible:    missionItem.speedSection.available
